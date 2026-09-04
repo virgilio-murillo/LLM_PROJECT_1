@@ -52,7 +52,7 @@ Los notebooks cargan resultados ya calculados por defecto (rápido, sin GPU). Pa
 | **E8 augmentation (fold-aware)** | 0.460 | +0.045 [+0.005,+0.087] | **SÍ** |
 | E9 sesgo | — | — | análisis |
 
-Solo E4, E8 y E6 tienen mejora estadísticamente significativa. El hallazgo estrella E1 es un empate honesto: *"con N=581, el fine-tuning no logra superar a un LLM sin entrenar"*.
+E4 y E8 (fold-aware) tienen mejora con IC que excluye 0; E6 es sugerente (sin IC pareado). El hallazgo E1 es no concluyente: *"con N=581, el fine-tuning no logra superar a un LLM sin entrenar"* (la diferencia de QWK incluye 0).
 
 ## Plan de PRs (para la organizadora del repo)
 
@@ -60,16 +60,15 @@ PRs pequeños e independientes, cada uno desde `main`. **No tocan `notebooks_pro
 
 | PR | Rama | Contenido | Riesgo |
 |----|------|-----------|--------|
-| 0 | `exp/00-infra` | `experimentos/src/`, `.gitignore`, `requirements-experimentos.txt`, `tests/`, este README. **Base de todo.** | Bajo |
-| 1 | `exp/p0-eval-honesta` | P0: StratifiedKFold + QWK/MAE + notebook 01 | Bajo |
-| 2 | `exp/e1-e2-llm` | E1 triple comparación + E2 agregación + notebook 02 | Medio |
-| 3 | `exp/e3-autoetiquetado` | E3 auto-etiquetado por concordancia | Alto (ética LLM) |
-| 4 | `exp/e4-ordinal` | E4 cabeza ordinal CORN | Bajo |
-| 5 | `exp/e6-backbone` | E6 RoBERTuito/BETO | Medio |
-| 6 | `exp/e7-limpieza` | E7 limpieza A/B | Bajo |
-| 7 | `exp/e8-augmentation` | E8 augmentation clases 4/5 | Medio |
-| 8 | `exp/e5-e9-honestidad` | E5 calibración + E9 sesgo + notebook 04 | Bajo |
-| 9 | `docs/reporte-y-presentacion` | Reporte HTML + presentación | Bajo |
+| 0 | `exp/00-infra` | `experimentos/src/`, `.gitignore`, `requirements-experimentos.txt`, `tests/`, README. **Base de todo.** | Bajo |
+| 1 | `exp/01-p0-eval-honesta` | P0: StratifiedKFold + QWK/MAE + notebook 01 | Bajo |
+| 2 | `exp/02-e1-e2-llm` | E1 triple comparación + E2 agregación + notebook 02 | Medio |
+| 3 | `exp/03-e3-autoetiquetado` | E3 auto-etiquetado por concordancia | Alto (ética LLM) |
+| 4 | `exp/04-e4-ordinal-corn` | E4 cabeza ordinal CORN | Bajo |
+| 5 | `exp/05-e6-backbone` | E6 RoBERTuito/BETO + E7 limpieza A/B + notebook 03 | Medio |
+| 6 | `exp/06-e8-augmentation` | E8 augmentation clases 4/5 (fold-aware) | Medio |
+| 7 | `exp/07-e5-e9-honestidad` | E5 calibración + E9 sesgo + notebook 04 | Bajo |
+| 8 | `docs/08-reportes-notebooks` | Notebook maestro, reporte, documentación | Bajo |
 
 **Excluir de los PRs:** venvs (`kiro-test/`), `investigation/`, `kiro-notes/`, `bedrock_raw.jsonl` (a un Release).
 
