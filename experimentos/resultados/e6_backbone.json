@@ -1,0 +1,53 @@
+{
+  "nlptown-baseline": {
+    "model": "nlptown/bert-base-multilingual-uncased-sentiment",
+    "oof_global": {
+      "accuracy": 0.46471600688468157,
+      "balanced_accuracy": 0.4032371866840313,
+      "f1_macro": 0.3832995493492644,
+      "f1_weighted": 0.4700719449112469,
+      "qwk": 0.41511203420632947,
+      "kappa_lineal": 0.33819034610725973,
+      "mae": 0.7607573149741824
+    },
+    "fold_sd": {
+      "f1_macro": 0.07192500991308419,
+      "qwk": 0.13501817246178877,
+      "mae": 0.08372833229285823
+    }
+  },
+  "beto": {
+    "model": "dccuchile/bert-base-spanish-wwm-uncased",
+    "oof_global": {
+      "accuracy": 0.45611015490533563,
+      "balanced_accuracy": 0.37074567115536367,
+      "f1_macro": 0.36530404995521276,
+      "f1_weighted": 0.45764002105514334,
+      "qwk": 0.31997588701828616,
+      "kappa_lineal": 0.28651150454213914,
+      "mae": 0.7969018932874354
+    },
+    "fold_sd": {
+      "f1_macro": 0.08013197035381851,
+      "qwk": 0.12227320603598994,
+      "mae": 0.09336729840314224
+    }
+  },
+  "robertuito": {
+    "model": "pysentimiento/robertuito-base-uncased",
+    "oof_global": {
+      "accuracy": 0.5387263339070568,
+      "balanced_accuracy": 0.4136894779724519,
+      "f1_macro": 0.41464171495519464,
+      "f1_weighted": 0.5354617182241157,
+      "qwk": 0.46989661405266003,
+      "kappa_lineal": 0.41387216503743973,
+      "mae": 0.6437177280550774
+    },
+    "fold_sd": {
+      "f1_macro": 0.07938544305395998,
+      "qwk": 0.12187675015037779,
+      "mae": 0.09832088684758954
+    }
+  }
+}
