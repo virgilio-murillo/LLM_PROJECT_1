@@ -1,0 +1,136 @@
+origen_idx,text,label
+4,"""A nadie le satisface nada en absoluto.""",3
+4,"""No hay nada que los deje satisfechos.""",3
+4,"""No hay nada que los haga felices.""",3
+26,"""Baños donde se pueden ver ajolotes""",3
+26,"""Espacios para relajarse rodeados de ajolotes""",3
+26,"""Baños decorados con encantadores ajolotes""",3
+32,"""Con la tarjeta de movilidad integrada, ya no me complicaré para viajar.""",3
+32,"""Gracias a la tarjeta de movilidad integrada, todo será más fácil.""",3
+32,"""Ya no me faltará la tarjeta, con la tarjeta de movilidad integrada se acabó.""",3
+34,"""Hablando de remodelación, no de reconstrucción porque eso sería casi una misión imposible, ya que encima ya hay viviendas construidas.""",3
+34,"""No fue una reconstrucción, sino una remodelación, porque arreglar todo de nuevo sería casi imposible con todas las casas que ya hay ahí arriba.""",3
+34,"""Dicen que fue remodelación y no reconstrucción porque volver a construir de cero sería casi una locura, con todas las casas que ya están ahí arriba.""",3
+5,"""Pásale crema porque luce que salió de un baño de sol tremendo, ¿de qué te quejas?""",3
+5,"""Se ve como si estuviera tomando el sol a toda hora, ¿a qué te refieres con que te quejas?""",3
+5,"""Parece que el sol lo bañó todo el día, ¿de qué te estás quejando?""",3
+33,"""Aunque se ve chido, no olvides que es el gobierno del modelo estetico.""",3
+33,"""A ver, se ve padre, pero no te olvides que es el gobierno del diseño bonito.""",3
+33,"""Sí se ve bien, pero recuerda que es el gobierno del prototipo estetizado.""",3
+92,"""Con 5 pesos, ¿qué se puede esperar sino una botellita de agua y un bocadito?""",3
+92,"""¿Cómo quieres que te den una botella de agua y un aperitivo si solo pagas 5 pesos?""",3
+92,"""A ver, si gastas 5 pesos, ¿de verdad piensas que te van a dar una botella de agua y un refrigerio?""",3
+146,"""A nada les pega, ¿verdad?""",3
+146,"""No les encaja nada, ¿cierto?""",3
+146,"""No les gusta nada de lo que ven.""",3
+112,"""Qué buena idea, me gusta""",4
+112,"""¡Excelente propuesta, felicitaciones!""",4
+112,"""¡Qué genial la iniciativa, adelante!""",4
+68,"""pero resulta que dicen que no lo hubieran cuidado antes y cuando ven todo lleno de grafiti y basura en el metro, los daños que tiene en general son por el uso de millones de personas y años sin mantenimiento""",3
+68,"""dicen que no lo hubieran cuidado antes, pero cuando miran el metro lleno de pintas y basura, se dan cuenta de que los daños son por millones de usuarios y años sin mantenimiento""",3
+68,"""la gente dice que no lo hubieran cuidado antes, pero cuando ven el metro lleno de grafiti y basura, se dan cuenta de que los daños son por el uso de millones de personas y años sin mantenimiento alguno""",3
+100,"""Me parecen útiles porque al final también nosotros los vamos a necesitar, pero no se olviden del detalle de su cuidado.""",3
+100,"""Me parecen chulos porque al final también nosotros los vamos a usar, pero que no falte el tema del mantenimiento.""",3
+100,"""Me parecen bien porque al final también nosotros los vamos a aprovechar, pero que no se les pase el detalle del mantenimiento.""",3
+75,"""No importa, porque al final salir más caro por la multa si urinás en la calle.""",3
+75,"""No hay problema, porque al final te sale más caro la multa que por orinar en la calle.""",3
+75,"""Ya vale, porque termina siendo más caro lo que te cobran por hacer pis en la vía pública.""",3
+177,"""Para nada me gusta, ¡les falta mucho!""",3
+177,"""De plano no me convence, ¡les falta mucho todavía!""",3
+177,"""Ni modo me aburre, ¡les falta pa' mejorarse mucho!""",3
+185,"""están bien para andar de antro en antro""",3
+185,"""son ideales para salir de un lado a otro en la ciudad""",3
+185,"""están perfectos para andar de fiesta y de un lugar a otro""",3
+156,"""La escenografía está quedando espectacular, ¡vaya trabajo!""",3
+156,"""¡Qué chamba tan padre se está quedando la escenografía!""",3
+156,"""La escenografía está quedando bien padre, ¡se nota el esfuerzo!""",3
+208,"""A pesar de las quejas, somos uno de los países que más disfruta y sigue este deporte.""",3
+208,"""Aunque se quejen, nosotros somos de los que más vemos y amamos este deporte.""",3
+208,"""No importa las quejas, seguimos siendo de los que más apoyamos y vemos este deporte.""",3
+228,"""Hay cosas más importantes, con el mundial viene el rollo""",4
+228,"""Antes que nada, cuando el mundial se acerca se siente el ambiente""",4
+228,"""Las cosas que importan llegan con el mundial, ahí es donde se siente""",4
+195,"""A todos nos incomoda, pero las personas que andan circulando por ahí son las que realmente afectan y, si cada quien usara las cosas con cuidado, no necesitáramos tanto mantenimiento; no es culpa del gobierno.""",3
+195,"""Todo nos afecta, pero claro, son las personas que andan por ahí sin cuidado lo que empeora todo, y si la gente usara las cosas con respeto, no habría tanto problema con el mantenimiento; no es solo culpa del gobierno.""",3
+195,"""Nos molesta todo, pero al final son las personas que andan circulando descuidadas las que empeoran la situación, y si cada quien usara las cosas de manera adecuada, no habría tanta necesidad de mantenimiento; no es solo culpa del gobierno.""",3
+277,"""El mundial va a generar un montón de empleos y lana con el turismo, así que estoy totalmente a favor de que se haga aquí.""",4
+277,"""Con el mundial va a haber un montón de oportunidades de trabajo y lana por el turismo, así que yo apoyo que se haga aquí.""",4
+277,"""El mundial traerá un montón de empleos y dinero por el turismo, así que estoy de 100% de acuerdo en que se realice aquí.""",4
+247,"""Se me hace chistoso que los estadios sean privados, el único beneficio para nosotros son las ventas, se me hace chistoso.""",3
+247,"""No puedo dejar de reír, los estadios son de propiedad privada, lo único que beneficia a la gente son las ventas, qué chistoso.""",3
+247,"""Me divierte tanto que los estadios son privados, la única cosa que nos beneficia somos las ventas, qué reír.""",3
+240,"""Aunque duele, no vamos a dejar que más de 30 equipos se queden sin Mundial, porque esos son problemas internos de México y no es culpa de la FIFA ni de los otros equipos.""",3
+240,"""Duele, pero no vamos a dejar que más de 30 selecciones se queden fuera del Mundial, porque esos problemas son cosa de México, no es culpa de la FIFA ni de los otros países.""",3
+240,"""Sí, duele, pero no vamos a permitir que más de 30 selecciones se queden sin ir al Mundial, porque son problemas de México y no es culpa de la FIFA ni de los otros equipos.""",3
+286,"""¿Cómo podemos impulsar que eso también pase en la CDMX?""",3
+286,"""¿Cómo hacemos para que eso también esté en la Ciudad de México?""",3
+286,"""¿Cómo apoyamos para que eso también ocurra en la capital?""",3
+303,"""Total respaldo a esta causa""",4
+303,"""Estoy completamente de acuerdo con este movimiento""",4
+303,"""Apoyo sin reservas este movimiento""",4
+304,"""Bienvenidos a Jalisco""",3
+304,"""Aquí estamos en Jalisco""",3
+304,"""Disfrutando de Jalisco desde aquí""",3
+173,"""Ya no les vale que el metro esté en reparación, siempre andan con sus 'qué si esto, qué si lo otro'. Pero si se dan cuenta, el metro nunca puede parar completamente porque millones de personas dependen de él. Y hacer un mantenimiento profundo toma mucho tiempo. Ahora, que esté cerrado de las 00:00 a las 05:00 am, en sólo 5 horas al día, pues no alcanza para un mantenimiento muy a fondo.""",3
+173,"""No les cuadra que el metro esté en mantenimiento, siempre con el 'qué si pasa con esto' y 'por qué con aquello'. Pero si se paran a pensar, el metro no puede dejar de operar porque millones de personas lo usan. Un mantenimiento profundo necesita mucho tiempo. Ahora, que esté fuera de servicio de las 12 de la noche a las 5 de la mañana, en sólo 5 horas diarias, es imposible hacer un mantenimiento profundo.""",3
+173,"""Ya no les cabe que el metro esté en reparación y siempre están con sus 'qué si esto, qué si lo otro'. Pero si se dan cuenta, el metro nunca puede dejar de funcionar porque es el transporte de millones de personas y un mantenimiento profundo consume mucho tiempo. Ahora, que está cerrado de las 00:00 a las 05:00 am, en 5 horas diarias, es imposible hacer un mantenimiento muy profundo.""",3
+376,"""Qué bonita campaña, no se depriman, estamos juntos en esto, me da tristeza.""",3
+376,"""Qué linda iniciativa, no se pongan tristes, estamos ahí con ustedes, me pone triste.""",3
+376,"""Qué hermosa movida, no se amilanen, estamos con ustedes, me da una tristeza.""",3
+419,"""Eres un capo, presidentes.""",4
+419,"""Qué bien que eres, presidentes.""",4
+419,"""Eres todo un jefe, presidentes.""",4
+343,"""Me encanta el fútbol, pero ya valió madrazo, ¡vamos a unirnos y que se escuchen todas esas voces!""",3
+343,"""Amo el fútbol, pero ya es momento de que se oigan todas esas voces y nos juntemos todos.""",3
+343,"""Me fascina el fútbol, pero ya es hora de que todas esas voces se escuchen y nos unamos.""",3
+418,"""Oye, pero tienen que cubrirme lo que perdí en mi trabajo y también traerme la despensa a mi casa, con una compensación, ¡no chin!""",3
+418,"""Mira, pero deben pagarme por lo de mi empleo y llevarme la despensa a mi casa, además de una bonificación, ¡no manches!""",3
+418,"""Eh, pero que me cubran lo que se perdió en mi trabajo y que me traigan la despensa a mi hogar, y también una compensación, ¡no jodas!""",3
+435,"""Porque si me dan dinero y hay vacaciones pagadas, ni salgo de casa.""",3
+435,"""Bueno, si me dan el dinero y las vacaciones son pagadas, ni modo que salga.""",3
+435,"""Porque si me pagan y las vacaciones las cubren, ni salgo de ahí.""",3
+438,"""Que vengan, pero que no sean tan negativos, ¿eh?""",4
+438,"""Que vengan pero que no traigan ese rollo negativo, por favor.""",4
+438,"""Que se animen a venir, pero que no sean negativos, eso no ayuda.""",4
+461,"""Ella se encargará de todos nuestros gastos, así que asegurémonos de estar listos para salir sin problemas.""",3
+461,"""Nos cubrirá todos los gastos, así que vamos a asegurarnos de estar preparados y salir tranquilos.""",3
+461,"""Ella se hará cargo de todos nuestros gastos, entonces pongámonos las pilas para salir seguros y sin complicaciones.""",3
+483,"""Ya es momento de que empiece la fiesta.""",4
+483,"""Es la hora de ponernos las pilas y que empiece la acción.""",4
+483,"""Ya vamos a arrancar con el juego.""",4
+485,"""Bueno, mientras me den el dinero por mis días de trabajo, con gusto me quedo a relajarme en mi casa.""",3
+485,"""Mientras me paguen por mis días laborados, sin problemas me quedo en casa a tomar un respiro.""",3
+485,"""Si me pagan por mis días de trabajo, con gusto me quedo en mi casa a tomar un descanso.""",3
+496,"""Creo que al fin alguien dijo algo con sentido.""",4
+496,"""Al parecer, por fin alguien habló algo que tenga lógica.""",4
+496,"""Parece que por fin alguien dijo algo que le haga sentido a la gente.""",4
+490,"""Exacto, por eso es que me gusta salir pa' conocer personas nuevas""",3
+490,"""Por eso mismo quiero andar por ahí, conocer tipos distintos""",3
+490,"""Así es, por eso quiero andar a ver gente variadita""",3
+492,"""Si nos dan dinero por eso, claro que me inscribo, ¡pero que sea una buena paga!""",4
+492,"""A ver, si por eso nos dan dinero, ¡cuenten conmigo! Pero que sea una buena cantidad.""",4
+492,"""Bueno, si nos van a compensar por eso, ¡cuenten conmigo! Pero que sea una paga justa.""",4
+518,"""Va a ser el Mundial más aburrido si es que no ocurre algo histórico.""",3
+518,"""Este Mundial será el más aburrido si no sucede algo memorable.""",3
+518,"""Será el Mundial más insípido si no pasa algo que quede en la historia.""",3
+535,"""¿Qué opinan si les regalamos boletos para su mundial?""",4
+535,"""¿Les gustaría que les obsequiáramos entradas para su mundial?""",4
+535,"""¿Qué tal si les hacemos un regalo de boletos para su mundial?""",4
+537,"""Claudiano está sola, qué oso.""",4
+537,"""Claudiano sola, qué pena.""",4
+537,"""Claudiano sin compañía, qué tristeza.""",4
+544,"""Se van por las ramas, pero siempre andan escondiendo cosas con sus propuestas.""",4
+544,"""No se quedan en el tema, pero continuamente intentan tapar detalles con lo que proponen.""",4
+544,"""No se mantienen en el punto, pero siempre están ocultando verdades con sus sugerencias.""",4
+499,"""¡Qué presidenta tan increíble, muchas gracias!""",4
+499,"""¡Vaya, qué excelente presidenta, muchas gracias!""",4
+499,"""¡Qué gran presidenta, ¡agradecido!""",4
+522,"""No puedo creer que le hayan dado el mundial a México, ¡los carteles van a estar de fiesta con los turistas!""",3
+522,"""¿En serio le dieron el mundial a México? ¡Los carteles van a celebrar con todos los turistas!""",3
+522,"""Me imagino a los carteles dándose la gran vida con todos los turistas ahora que México tiene el mundial.""",3
+559,"""¡Presidenta, qué chamba!""",4
+559,"""¡Ay, presidenta, qué rola!""",4
+559,"""¡Qué onda, presidenta!""",4
+580,"""Afortunadamente, todavía nos quedan 5 años más con nuestra presidenta.""",4
+580,"""Por suerte, todavía tenemos 5 años más con nuestra presidenta.""",4
+580,"""Gracias a Dios, nos quedan 5 años más con nuestra presidenta.""",4
