@@ -2,7 +2,7 @@
 
 Diez experimentos que fortalecen el proyecto de análisis de sentimiento ordinal (TikTok, Mundial 2026), evaluados con honestidad estadística (métricas ordinales + intervalos de confianza bootstrap). Todo corre localmente en GPU Metal (MPS) y con Amazon Bedrock (costo total ~$3-5).
 
-> **Baseline honesto contra el que se mide todo: QWK 0.415** (validación cruzada estratificada, out-of-fold). El "0.66" del proyecto original era leakage in-sample y no se usa.
+> **Referencia interna para comparar los experimentos entre sí: QWK 0.415** (validación cruzada estratificada, predicciones *out-of-fold*). Difiere del 0.66/0.67 reportado en el proyecto base porque ese se calcula *in-sample* (sobre datos vistos en entrenamiento) y este mide generalización a datos no vistos. Ambas cifras responden preguntas distintas; adoptamos la out-of-fold solo para poder comparar de forma pareada las intervenciones de esta carpeta.
 
 ## Estructura
 
@@ -42,14 +42,14 @@ Los notebooks cargan resultados ya calculados por defecto (rápido, sin GPU). Pa
 | Experimento | QWK | Δ vs baseline (IC95) | ¿Significativo? |
 |---|---|---|---|
 | P0 baseline | 0.415 | referencia | — |
-| E1 Consenso-LLM | 0.498 | +0.083 [−0.002,+0.168] | empate (P=0.97) |
+| E1 Consenso-LLM | 0.498 | +0.082 [−0.002,+0.168] | no concluyente (P=0.97) |
 | E2 mediana | 0.498 | — | mediana > mayoría |
 | E3 auto-etiquetado | 0.449 | +0.033 [−0.025,+0.089] | dentro del ruido |
 | **E4 CORN** | 0.414 | MAE −0.106 [+0.043,+0.164] | **SÍ** |
 | E5 calibración | 0.526 @60% | — | honestidad |
 | **E6 RoBERTuito** | 0.470 | +0.055 | sí (borde) |
 | E7 limpieza mínima | 0.460 | +0.017 [−0.017,+0.051] | dentro del ruido |
-| **E8 augmentation** | 0.472 | +0.057 [+0.018,+0.097] | **SÍ** |
+| **E8 augmentation (fold-aware)** | 0.460 | +0.045 [+0.005,+0.087] | **SÍ** |
 | E9 sesgo | — | — | análisis |
 
 Solo E4, E8 y E6 tienen mejora estadísticamente significativa. El hallazgo estrella E1 es un empate honesto: *"con N=581, el fine-tuning no logra superar a un LLM sin entrenar"*.

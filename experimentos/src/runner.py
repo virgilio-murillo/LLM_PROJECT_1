@@ -6,7 +6,8 @@ Runner reutilizable de CV estratificada con LoRA. Permite variar UN factor:
 Mantiene todo lo demas fijo para no confundir variables.
 Devuelve predicciones OOF + metricas por fold + resumen. Corre en MPS.
 """
-import sys, time
+import sys
+import time
 from pathlib import Path
 import numpy as np
 import torch
