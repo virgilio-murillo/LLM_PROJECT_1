@@ -1,0 +1,49 @@
+{
+  "per_model": {
+    "nova-micro": {
+      "qwk": 0.492,
+      "mae": 0.628,
+      "f1_macro": 0.365,
+      "accuracy": 0.48
+    },
+    "nova-lite": {
+      "qwk": 0.489,
+      "mae": 0.654,
+      "f1_macro": 0.401,
+      "accuracy": 0.503
+    },
+    "nova-pro": {
+      "qwk": 0.46,
+      "mae": 0.74,
+      "f1_macro": 0.368,
+      "accuracy": 0.491
+    },
+    "llama3-8b": {
+      "qwk": 0.252,
+      "mae": 1.005,
+      "f1_macro": 0.247,
+      "accuracy": 0.365
+    }
+  },
+  "aggregations": {
+    "mayoria": {
+      "qwk": 0.488,
+      "mae": 0.695,
+      "f1_macro": 0.378,
+      "accuracy": 0.509
+    },
+    "mediana": {
+      "qwk": 0.498,
+      "mae": 0.639,
+      "f1_macro": 0.41,
+      "accuracy": 0.496
+    },
+    "promedio_red": {
+      "qwk": 0.452,
+      "mae": 0.683,
+      "f1_macro": 0.372,
+      "accuracy": 0.444
+    }
+  },
+  "inter_llm_all_agree": 0.17555938037865748
+}

@@ -1,0 +1,23 @@
+[
+  {
+    "exp": "E1_LLM",
+    "delta_qwk": 0.083,
+    "p_perm": 0.0614,
+    "umbral_holm": 0.0167,
+    "sig": false
+  },
+  {
+    "exp": "E3_autolabel",
+    "delta_qwk": 0.033,
+    "p_perm": 0.2551,
+    "umbral_holm": 0.025,
+    "sig": false
+  },
+  {
+    "exp": "E4_CORN",
+    "delta_qwk": -0.001,
+    "p_perm": 0.985,
+    "umbral_holm": 0.05,
+    "sig": false
+  }
+]
