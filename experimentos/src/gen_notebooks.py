@@ -185,15 +185,15 @@ print("La version con fuga daba +0.057; al corregirla baja a +0.045 pero el efec
 
 # ============================ NB 01 — P0 ============================
 save("01_P0_evaluacion_honesta.ipynb", [
- md("""# P0 — Arreglar la forma de medir (precondición de todo)
+ md("""# P0 — Evaluación out-of-fold estratificada (referencia interna)
 
 ## 1. La pregunta de investigación
-¿El desempeño que reportaba el proyecto original (QWK 0.66) era confiable?
+¿Cómo medir la generalización a datos no vistos para comparar las intervenciones de esta carpeta?
 
 ## 2. La hipótesis
 No, por dos razones que sospechamos y vamos a comprobar:
 1. **Partición no estratificada.** El proyecto usaba `KFold`, que reparte los datos al azar. Con la clase 5 (positiva) teniendo solo **15 ejemplos**, algunos folds quedan casi sin positivos, y la métrica salta mucho de un fold a otro (medición inestable).
-2. **Data leakage (fuga de datos).** El 0.66 se obtuvo evaluando el *mejor* fold sobre los 581 comentarios completos, incluidos los que ese fold usó para entrenar. Es como presumir la nota de un examen cuyas preguntas ya conocías.
+2. **Data leakage (fuga de datos).** El 0.66 se obtuvo evaluando el *mejor* fold sobre los 581 comentarios completos, incluidos los que ese fold usó para entrenar. En una evaluación in-sample el ejemplo ya influyó en el ajuste, por lo que la métrica tiende a ser optimista; la out-of-fold lo evita.
 
 ## 3. El método
 Reentrenamos el mismo modelo (BERT multilingüe + adaptador LoRA, config real r=32) con **`StratifiedKFold`** (mantiene la proporción de clases en cada fold) y **predicciones out-of-fold** (cada comentario lo predice un modelo que NO lo vio). Añadimos las métricas ordinales correctas (QWK, MAE). Comparamos la varianza entre folds contra el `KFold` original.

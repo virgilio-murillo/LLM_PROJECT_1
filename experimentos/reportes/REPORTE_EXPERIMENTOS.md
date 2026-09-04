@@ -10,7 +10,7 @@ Reporte formal de la implementación de los experimentos del roadmap. Todos los 
 
 ---
 
-## P0 — Arreglar la evaluación (precondición)
+## P0 — Evaluación out-of-fold estratificada (referencia interna)
 
 **Qué se hizo:** se reentrenó el modelo LoRA con la config real (r=32, alpha=64, dropout=0.2) usando **StratifiedKFold** en vez de `KFold`, con predicciones **out-of-fold** (cada ejemplo predicho por un modelo que no lo vio) y métricas ordinales. Se comparó contra el `KFold` no estratificado original.
 
@@ -26,7 +26,7 @@ Reporte formal de la implementación de los experimentos del roadmap. Todos los 
 
 ![P0 varianza](assets/p0_varianza.png)
 
-**Conclusión.** StratifiedKFold **redujo la varianza entre folds de 0.090 a 0.072** (folds más estables y comparables), con desempeño equivalente (la pequeña diferencia está dentro del ruido). Esto era exactamente lo predicho: con la clase 5 (15 ejemplos), el KFold no estratificado dejaba algunos folds casi sin ejemplos positivos, inflando la varianza. **El baseline honesto queda fijado: QWK 0.415, F1 macro 0.383, MAE 0.761.** Todo experimento posterior se mide contra esto (nunca contra el 0.66 in-sample, que era leakage).
+**Conclusión.** StratifiedKFold **redujo la varianza entre folds de 0.090 a 0.072** (folds más estables y comparables), con desempeño equivalente (la pequeña diferencia está dentro del ruido). Esto era exactamente lo predicho: con la clase 5 (15 ejemplos), el KFold no estratificado dejaba algunos folds casi sin ejemplos positivos, inflando la varianza. **El baseline honesto queda fijado: QWK 0.415, F1 macro 0.383, MAE 0.761.** Todo experimento posterior se compara contra esta referencia out-of-fold. El 0.66/0.67 del proyecto base es una medición in-sample (responde una pregunta distinta: el ajuste del mejor fold), por lo que no es la referencia adecuada para comparar generalización entre experimentos.
 
 ---
 

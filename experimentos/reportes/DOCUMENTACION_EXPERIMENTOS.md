@@ -4,7 +4,7 @@ Cada experimento en lenguaje sencillo: qué pregunta responde, cómo se hizo, qu
 
 ---
 
-## P0 — Arreglar la forma de medir
+## P0 — Evaluación out-of-fold estratificada
 
 **La pregunta.** ¿El número que reportaba el proyecto original (0.66) era confiable?
 
