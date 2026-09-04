@@ -1,0 +1,17 @@
+# Artefactos que NO deben entrar a los PRs
+__pycache__/
+*.pyc
+.chartvenv/
+.mlvenv/
+.tokvenv/
+.venv/
+
+# Volcado crudo grande de respuestas LLM (1.9MB): adjuntar a un GitHub Release, no al arbol
+resultados/bedrock_raw.jsonl
+
+# Logs de entrenamiento (ruido, no reproducibles)
+logs/
+
+# Backups del saneador
+*.bak
+.pytest_cache/

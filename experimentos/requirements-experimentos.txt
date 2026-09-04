@@ -1,0 +1,25 @@
+# Dependencias de los experimentos (experimentos/).
+# Separadas del requirements.txt principal para no imponer torch/bedrock a quien solo corre el pipeline base.
+
+# Nucleo (ya en el proyecto)
+pandas>=2.0
+numpy>=1.24
+scikit-learn>=1.3
+scipy>=1.10
+matplotlib>=3.7
+
+# Modelado local (E4, E6, E7, E8, P0)
+torch>=2.0
+transformers>=4.40
+peft>=0.10
+datasets>=2.18
+accelerate>=0.30
+coral-pytorch>=1.4        # cabeza ordinal CORN (E4)
+ftfy>=6.0                 # limpieza (E7)
+
+# LLMs de Amazon Bedrock (E1, E2, E3, E8)
+boto3>=1.34
+
+# Notebooks
+jupyter
+nbconvert
