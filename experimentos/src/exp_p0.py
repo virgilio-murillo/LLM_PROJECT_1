@@ -1,5 +1,5 @@
 """
-P0 - Precondicion: arreglar la evaluacion.
+P0 - Evaluacion out-of-fold estratificada (referencia interna para comparar experimentos).
 - StratifiedKFold (no KFold) sobre el gold set 581.
 - LoRA con la config REAL del adapter (r=32, alpha=64, dropout=0.2, targets key/query/value/dense).
 - Predicciones OUT-OF-FOLD (cada ejemplo predicho por un modelo que NO lo vio) => baseline honesto.
@@ -7,7 +7,9 @@ P0 - Precondicion: arreglar la evaluacion.
 - Guarda las predicciones OOF para reusar en E1 (triple comparacion) y tests estadisticos.
 Corre en MPS (GPU Metal del Mac) si esta disponible.
 """
-import sys, json, time
+import sys
+import json
+import time
 from pathlib import Path
 import numpy as np
 import torch
@@ -23,7 +25,7 @@ import common as C
 MODEL = "nlptown/bert-base-multilingual-uncased-sentiment"
 K = 10
 EPOCHS = 7
-MAXLEN = 128  # el corpus tiene p99=73 tokens; 128 basta y acelera (el proyecto usaba 580, desperdicio)
+MAXLEN = 128  # el corpus tiene p99=73 tokens; 128 basta y acelera (el proyecto base usa 580; 128 acelera sin truncar (p99=73))
 DEVICE = "mps" if torch.backends.mps.is_available() else "cpu"
 
 
