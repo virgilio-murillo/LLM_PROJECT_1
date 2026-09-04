@@ -346,8 +346,9 @@ afinado con LoRA sobre 581 ejemplos. El intervalo de confianza roza el 0
 (técnicamente un "empate" estadístico), pero la probabilidad de que el
 LLM supere al BERT es del 97%. Para una tesis esto es un resultado
 fuerte y honesto: <strong>con un gold set diminuto, el fine-tuning no
-logra superar a un LLM bien prompteado.</strong> El LLM gana en las tres
-categorías temáticas y en las clases minoritarias:</p>
+logra superar a un LLM bien prompteado.</strong> El consenso-LLM obtiene
+mayor QWK en las tres categorías (diferencias por eje no concluyentes) y
+en las clases minoritarias:</p>
 <p><img src="assets/e1_por_eje.png" alt="E1 por eje" /></p>
 <table>
 <thead>
@@ -515,16 +516,16 @@ preentrenado en ~500M de tweets en español).</p>
 </tr>
 </tbody>
 </table>
-<p><strong>Conclusión.</strong> <strong>RoBERTuito supera al
-baseline</strong> (+0.055 QWK), confirmando la hipótesis: un modelo
-preentrenado en texto social en español entiende mejor el registro
-coloquial, los emojis y el slang de TikTok. BETO, en cambio, quedó por
-debajo del baseline (0.320), lo que refuerza que la superioridad de un
-backbone no se asume, se mide: el hecho de estar entrenado en español
-(BETO) no basta; importa que sea en el dominio correcto (texto social,
-RoBERTuito). Esto valida la nota del roadmap de que la ventaja de
-RoBERTuito sobre BETO es "mixta en la literatura" y hay que medirla en
-el propio corpus.</p>
+<p><strong>Conclusión.</strong> <strong>RoBERTuito obtiene mayor QWK que
+el baseline</strong> (+0.055; no se calculó IC pareado, tómese como
+sugerente), consistente con la hipótesis: un modelo preentrenado en
+texto social en español entiende mejor el registro coloquial, los emojis
+y el slang de TikTok. BETO, en cambio, quedó por debajo del baseline
+(0.320), lo que refuerza que la superioridad de un backbone no se asume,
+se mide: el hecho de estar entrenado en español (BETO) no basta; importa
+que sea en el dominio correcto (texto social, RoBERTuito). Esto valida
+la nota del roadmap de que la ventaja de RoBERTuito sobre BETO es "mixta
+en la literatura" y hay que medirla en el propio corpus.</p>
 <hr />
 <h2 id="e7--limpieza-menos-destructiva-ab">E7 — Limpieza menos
 destructiva (A/B)</h2>
@@ -729,7 +730,7 @@ entrenamiento (el test siempre 100% humano) y se midió OOF.</p>
 <tr>
 <td>QWK</td>
 <td>0.415</td>
-<td><strong>0.472</strong></td>
+<td><strong>0.460</strong></td>
 </tr>
 <tr>
 <td>F1 macro</td>
@@ -739,20 +740,20 @@ entrenamiento (el test siempre 100% humano) y se midió OOF.</p>
 <tr>
 <td><strong>F1 clases 4/5</strong></td>
 <td><strong>0.223</strong></td>
-<td><strong>0.311</strong></td>
+<td><strong>0.262</strong></td>
 </tr>
 </tbody>
 </table>
-<p><strong>Delta QWK vs P0 = +0.057, IC95 [+0.018, +0.097] — NO cruza 0
-(significativo).</strong></p>
+<p><strong>Delta QWK vs P0 = +0.045, IC95 [+0.005, +0.087] — NO cruza 0
+(significativo). Versión fold-aware, SIN fuga.</strong></p>
 <p><strong>Conclusión.</strong> Contra la advertencia del roadmap (que
 la augmentation podía ser neutral o dañina), en este corpus <strong>sí
 funcionó de forma significativa</strong>: las paráfrasis LLM de los
-positivos escasos subieron el F1 de las clases 4/5 de 0.22 a 0.31 y el
-QWK global +0.057. Es uno de los tres experimentos con IC que excluye el
-0 (junto con E4 y, de cerca, E6). Tiene sentido: ampliar artificialmente
-las clases que solo tenían 30 y 15 ejemplos ataca directamente la causa
-raíz (desbalance extremo).</p>
+positivos escasos subieron el F1 de las clases 4/5 de 0.22 a 0.26 y el
+QWK global +0.045 (fold-aware, sin fuga). Es uno de los tres
+experimentos con IC que excluye el 0 (junto con E4 y, de cerca, E6).
+Tiene sentido: ampliar artificialmente las clases que solo tenían 30 y
+15 ejemplos ataca directamente la causa raíz (desbalance extremo).</p>
 <hr />
 <h2 id="e9--análisis-de-sesgo-análogo-local-a-sagemaker-clarify">E9 —
 Análisis de sesgo (análogo local a SageMaker Clarify)</h2>
@@ -841,8 +842,8 @@ resumen de los 10 experimentos</h2>
 <td><strong>E6 RoBERTuito</strong></td>
 <td>0.470</td>
 <td>+0.055</td>
-<td>Sí (borderline)</td>
-<td>Backbone social español gana</td>
+<td>Sugerente (sin IC pareado)</td>
+<td>Backbone social español, mayor QWK</td>
 </tr>
 <tr>
 <td>E7 limpieza mínima</td>
@@ -852,11 +853,11 @@ resumen de los 10 experimentos</h2>
 <td>Emojis ayudan poco (dentro del ruido)</td>
 </tr>
 <tr>
-<td><strong>E8 augmentation</strong></td>
-<td>0.472</td>
-<td>+0.057</td>
+<td><strong>E8 augmentation (fold-aware)</strong></td>
+<td>0.460</td>
+<td>+0.045</td>
 <td><strong>Sí</strong></td>
-<td>Sube clases escasas 4/5</td>
+<td>Sube clases escasas 4/5 (sin fuga)</td>
 </tr>
 <tr>
 <td>E9 análisis de sesgo</td>
@@ -872,11 +873,13 @@ resumen de los 10 experimentos</h2>
 <li><strong>El hallazgo más fuerte (E1):</strong> un ensemble de LLMs
 sin entrenar iguala o supera al BERT afinado. Con un gold set de 581, el
 fine-tuning no logra ventaja. Esto es publicable y original.</li>
-<li><strong>Los tres experimentos con mejora estadísticamente
-significativa (IC excluye 0):</strong> E4 (cabeza ordinal, MAE −0.106),
-E8 (augmentation, QWK +0.057) y E6 (RoBERTuito, QWK +0.055). Los tres
-atacan causas raíz distintas (métrica ordinal, desbalance, dominio del
-backbone).</li>
+<li><strong>Mejoras con IC pareado que excluye 0:</strong> E4 (cabeza
+ordinal, MAE −0.106 IC[+0.043,+0.164]) y E8 fold-aware (augmentation,
+QWK +0.045 IC[+0.005,+0.087]). E6 (RoBERTuito, +0.055 QWK) es sugerente
+pero no se calculó su IC pareado, así que se reporta como no confirmado.
+Nota: con corrección Holm-Bonferroni sobre QWK ningún delta sobrevive;
+por eso los hallazgos sólidos se anclan en MAE (E4) y F1 de clases raras
+(E8).</li>
 <li><strong>La mejor combinación probable</strong> (trabajo futuro):
 RoBERTuito (E6) + cabeza CORN (E4) + augmentation (E8) + auto-etiquetado
 (E3), todo bajo la evaluación honesta de P0. Cada uno aportó por

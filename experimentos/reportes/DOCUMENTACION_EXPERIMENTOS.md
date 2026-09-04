@@ -22,7 +22,7 @@ Cada experimento en lenguaje sencillo: qué pregunta responde, cómo se hizo, qu
 
 **Cómo.** Le pedimos a 4 LLMs (Nova Micro/Lite/Pro y Llama) que clasifiquen los mismos 581 comentarios, y comparamos su consenso contra el humano, igual que al BERT.
 
-**El resultado.** El LLM (QWK **0.498**) iguala o supera al BERT afinado (0.415). La probabilidad de que el LLM sea mejor es 97%, aunque estadísticamente es un **empate** (el margen roza el cero).
+**El resultado.** El LLM (QWK **0.498**) obtiene más que el BERT afinado (0.415), pero la diferencia **no es concluyente**: el IC de la diferencia [-0.002,+0.168] incluye 0 (evidencia débilmente favorable al LLM, P≈0.97).
 
 **Qué significa.** El marco honesto: *con solo 581 ejemplos, entrenar un modelo no logra superar a un LLM bien preguntado*. Es un hallazgo interesante y defendible para la tesis.
 
@@ -34,7 +34,7 @@ Cada experimento en lenguaje sencillo: qué pregunta responde, cómo se hizo, qu
 
 **Cómo.** Comparamos tres formas de combinar: voto por mayoría, promedio, y mediana (el valor de en medio).
 
-**El resultado.** La **mediana gana** (QWK 0.498 vs 0.488 de mayoría vs 0.452 de promedio).
+**El resultado.** La **mediana obtiene el mayor QWK** (0.498 vs 0.488 de mayoría vs 0.452 de promedio).
 
 **Qué significa.** Como la escala tiene orden, la mediana lo respeta y no se deja arrastrar por un LLM atípico. Lección práctica: usar mediana, no voto por mayoría.
 
@@ -104,9 +104,9 @@ Cada experimento en lenguaje sencillo: qué pregunta responde, cómo se hizo, qu
 
 **La pregunta.** Las clases positivas (4 y 5) tienen solo 45 ejemplos entre las dos. ¿Ayuda generar más con un LLM?
 
-**Cómo.** Le pedimos a un LLM que reescribiera (parafraseara) los 45 positivos, generando 134 ejemplos sintéticos. Los añadimos solo al entrenamiento (nunca al examen).
+**Cómo.** Le pedimos a un LLM que reescribiera (parafraseara) los 45 positivos, generando 135 ejemplos sintéticos (paráfrasis solo del train de cada fold, sin fuga). Los añadimos solo al entrenamiento (nunca al examen).
 
-**El resultado.** El F1 de las clases 4/5 subió de 0.22 a **0.31**, y el QWK global +0.057. **Estadísticamente significativo.**
+**El resultado.** El F1 de las clases 4/5 subió de 0.22 a **0.26**, y el QWK global +0.045 (IC[+0.005,+0.087]). **Estadísticamente significativo, versión fold-aware sin fuga de datos.**
 
 **Qué significa.** Atacar directamente el desbalance funciona. Es de los tres resultados sólidos.
 
@@ -126,4 +126,4 @@ Cada experimento en lenguaje sencillo: qué pregunta responde, cómo se hizo, qu
 
 ## En una frase
 
-De los 10 experimentos, **tres dan mejoras reales y comprobables** (E4 cabeza ordinal, E8 datos sintéticos, E6 modelo en español); el hallazgo más llamativo (E1: el LLM iguala al modelo entrenado) es un empate honesto; y el resto aporta rigor y honestidad metodológica. El techo lo pone el tamaño del gold set (581 ejemplos): la mejora de fondo será ampliarlo.
+De los 10 experimentos, **tres dan mejoras significativas** (E4 en MAE, E8 fold-aware en F1 de clases raras, E6 en QWK al borde). Con corrección por comparaciones múltiples (Holm-Bonferroni) ningún delta de QWK sobrevive; los hallazgos sólidos son en MAE (E4) y F1 (E8); el hallazgo más llamativo (E1: el LLM iguala al modelo entrenado) es un empate honesto; y el resto aporta rigor y honestidad metodológica. El techo lo pone el tamaño del gold set (581 ejemplos): la mejora de fondo será ampliarlo.

@@ -45,7 +45,7 @@ Reporte formal de la implementación de los experimentos del roadmap. Todos los 
 
 **Diferencia QWK (LLM − BERT) = +0.082, IC95 [−0.002, +0.168], P(LLM>BERT) = 0.97.**
 
-**Conclusión (hallazgo central).** Un ensemble de LLMs **sin ningún entrenamiento** iguala o supera a un BERT afinado con LoRA sobre 581 ejemplos. El intervalo de confianza roza el 0 (técnicamente un "empate" estadístico), pero la probabilidad de que el LLM supere al BERT es del 97%. Para una tesis esto es un resultado fuerte y honesto: **con un gold set diminuto, el fine-tuning no logra superar a un LLM bien prompteado.** El LLM gana en las tres categorías temáticas y en las clases minoritarias:
+**Conclusión (hallazgo central).** Un ensemble de LLMs **sin ningún entrenamiento** iguala o supera a un BERT afinado con LoRA sobre 581 ejemplos. El intervalo de confianza roza el 0 (técnicamente un "empate" estadístico), pero la probabilidad de que el LLM supere al BERT es del 97%. Para una tesis esto es un resultado fuerte y honesto: **con un gold set diminuto, el fine-tuning no logra superar a un LLM bien prompteado.** El consenso-LLM obtiene mayor QWK en las tres categorías (diferencias por eje no concluyentes) y en las clases minoritarias:
 
 ![E1 por eje](assets/e1_por_eje.png)
 
@@ -106,7 +106,7 @@ Matiz honesto: la mediana (0.498) apenas supera al mejor LLM individual (Nova Mi
 | BETO | 0.320 |
 | **RoBERTuito** | **0.470** |
 
-**Conclusión.** **RoBERTuito supera al baseline** (+0.055 QWK), confirmando la hipótesis: un modelo preentrenado en texto social en español entiende mejor el registro coloquial, los emojis y el slang de TikTok. BETO, en cambio, quedó por debajo del baseline (0.320), lo que refuerza que la superioridad de un backbone no se asume, se mide: el hecho de estar entrenado en español (BETO) no basta; importa que sea en el dominio correcto (texto social, RoBERTuito). Esto valida la nota del roadmap de que la ventaja de RoBERTuito sobre BETO es "mixta en la literatura" y hay que medirla en el propio corpus.
+**Conclusión.** **RoBERTuito obtiene mayor QWK que el baseline** (+0.055; no se calculó IC pareado, tómese como sugerente), consistente con la hipótesis: un modelo preentrenado en texto social en español entiende mejor el registro coloquial, los emojis y el slang de TikTok. BETO, en cambio, quedó por debajo del baseline (0.320), lo que refuerza que la superioridad de un backbone no se asume, se mide: el hecho de estar entrenado en español (BETO) no basta; importa que sea en el dominio correcto (texto social, RoBERTuito). Esto valida la nota del roadmap de que la ventaja de RoBERTuito sobre BETO es "mixta en la literatura" y hay que medirla en el propio corpus.
 
 ---
 
@@ -193,13 +193,13 @@ Matiz honesto: la mediana (0.498) apenas supera al mejor LLM individual (Nova Mi
 
 | Métrica | P0 (sin aug) | E8 (+134 sintéticos) |
 |---|---|---|
-| QWK | 0.415 | **0.472** |
+| QWK | 0.415 | **0.460** |
 | F1 macro | 0.383 | 0.434 |
-| **F1 clases 4/5** | **0.223** | **0.311** |
+| **F1 clases 4/5** | **0.223** | **0.262** |
 
-**Delta QWK vs P0 = +0.057, IC95 [+0.018, +0.097] — NO cruza 0 (significativo).**
+**Delta QWK vs P0 = +0.045, IC95 [+0.005, +0.087] — NO cruza 0 (significativo). Versión fold-aware, SIN fuga.**
 
-**Conclusión.** Contra la advertencia del roadmap (que la augmentation podía ser neutral o dañina), en este corpus **sí funcionó de forma significativa**: las paráfrasis LLM de los positivos escasos subieron el F1 de las clases 4/5 de 0.22 a 0.31 y el QWK global +0.057. Es uno de los tres experimentos con IC que excluye el 0 (junto con E4 y, de cerca, E6). Tiene sentido: ampliar artificialmente las clases que solo tenían 30 y 15 ejemplos ataca directamente la causa raíz (desbalance extremo).
+**Conclusión.** Contra la advertencia del roadmap (que la augmentation podía ser neutral o dañina), en este corpus **sí funcionó de forma significativa**: las paráfrasis LLM de los positivos escasos subieron el F1 de las clases 4/5 de 0.22 a 0.26 y el QWK global +0.045 (fold-aware, sin fuga). Es uno de los tres experimentos con IC que excluye el 0 (junto con E4 y, de cerca, E6). Tiene sentido: ampliar artificialmente las clases que solo tenían 30 y 15 ejemplos ataca directamente la causa raíz (desbalance extremo).
 
 ---
 
@@ -231,15 +231,15 @@ Matiz honesto: la mediana (0.498) apenas supera al mejor LLM individual (Nova Mi
 | **E3 auto-etiq gate≥3** | 0.449 | +0.033 | No (IC roza 0) | Prometedor; rompe el techo de N |
 | **E4 CORN ordinal** | 0.414 | MAE −0.106 | **Sí (MAE)** | Reduce errores lejanos; ordinal correcto |
 | E5 calibración | 0.526 @60% | — | — | Abstención sube calidad; honestidad |
-| **E6 RoBERTuito** | 0.470 | +0.055 | Sí (borderline) | Backbone social español gana |
+| **E6 RoBERTuito** | 0.470 | +0.055 | Sugerente (sin IC pareado) | Backbone social español, mayor QWK |
 | E7 limpieza mínima | 0.460 | +0.017 | No | Emojis ayudan poco (dentro del ruido) |
-| **E8 augmentation** | 0.472 | +0.057 | **Sí** | Sube clases escasas 4/5 |
+| **E8 augmentation (fold-aware)** | 0.460 | +0.045 | **Sí** | Sube clases escasas 4/5 (sin fuga) |
 | E9 análisis de sesgo | — | — | — | Infraestructura peor; sesgo anti-neutral |
 
 ### Las lecciones
 
 1. **El hallazgo más fuerte (E1):** un ensemble de LLMs sin entrenar iguala o supera al BERT afinado. Con un gold set de 581, el fine-tuning no logra ventaja. Esto es publicable y original.
-2. **Los tres experimentos con mejora estadísticamente significativa (IC excluye 0):** E4 (cabeza ordinal, MAE −0.106), E8 (augmentation, QWK +0.057) y E6 (RoBERTuito, QWK +0.055). Los tres atacan causas raíz distintas (métrica ordinal, desbalance, dominio del backbone).
+2. **Mejoras con IC pareado que excluye 0:** E4 (cabeza ordinal, MAE −0.106 IC[+0.043,+0.164]) y E8 fold-aware (augmentation, QWK +0.045 IC[+0.005,+0.087]). E6 (RoBERTuito, +0.055 QWK) es sugerente pero no se calculó su IC pareado, así que se reporta como no confirmado. Nota: con corrección Holm-Bonferroni sobre QWK ningún delta sobrevive; por eso los hallazgos sólidos se anclan en MAE (E4) y F1 de clases raras (E8).
 3. **La mejor combinación probable** (trabajo futuro): RoBERTuito (E6) + cabeza CORN (E4) + augmentation (E8) + auto-etiquetado (E3), todo bajo la evaluación honesta de P0. Cada uno aportó por separado; combinarlos es la siguiente iteración.
 4. **El techo de N=581 se confirmó:** ninguna mejora individual rompe la barrera del ruido de forma contundente, salvo las que amplían datos (E3, E8) o corrigen la métrica (E4). Coincide con la predicción del roadmap.
 5. **Contribuciones de honestidad (E5, E9):** calibración con abstención y análisis de sesgo elevan el rigor de la tesis sin depender de subir el F1.
