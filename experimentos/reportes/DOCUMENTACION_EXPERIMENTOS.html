@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>Guia tecnica</title>
+  <style>
+    /* Default styles provided by pandoc.
+    ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+    */
+    html {
+      color: #1a1a1a;
+      background-color: #fdfdfd;
+    }
+    body {
+      margin: 0 auto;
+      max-width: 36em;
+      padding-left: 50px;
+      padding-right: 50px;
+      padding-top: 50px;
+      padding-bottom: 50px;
+      hyphens: auto;
+      overflow-wrap: break-word;
+      text-rendering: optimizeLegibility;
+      font-kerning: normal;
+    }
+    @media (max-width: 600px) {
+      body {
+        font-size: 0.9em;
+        padding: 12px;
+      }
+      h1 {
+        font-size: 1.8em;
+      }
+    }
+    @media print {
+      html {
+        background-color: white;
+      }
+      body {
+        background-color: transparent;
+        color: black;
+        font-size: 12pt;
+      }
+      p, h2, h3 {
+        orphans: 3;
+        widows: 3;
+      }
+      h2, h3, h4 {
+        page-break-after: avoid;
+      }
+    }
+    p {
+      margin: 1em 0;
+    }
+    a {
+      color: #1a1a1a;
+    }
+    a:visited {
+      color: #1a1a1a;
+    }
+    img {
+      max-width: 100%;
+    }
+    svg {
+      height: auto;
+      max-width: 100%;
+    }
+    h1, h2, h3, h4, h5, h6 {
+      margin-top: 1.4em;
+    }
+    h5, h6 {
+      font-size: 1em;
+      font-style: italic;
+    }
+    h6 {
+      font-weight: normal;
+    }
+    ol, ul {
+      padding-left: 1.7em;
+      margin-top: 1em;
+    }
+    li > ol, li > ul {
+      margin-top: 0;
+    }
+    blockquote {
+      margin: 1em 0 1em 1.7em;
+      padding-left: 1em;
+      border-left: 2px solid #e6e6e6;
+      color: #606060;
+    }
+    code {
+      white-space: pre-wrap;
+      font-family: Menlo, Monaco, Consolas, 'Lucida Console', monospace;
+      font-size: 85%;
+      margin: 0;
+      hyphens: manual;
+    }
+    pre {
+      margin: 1em 0;
+      overflow: auto;
+    }
+    pre code {
+      padding: 0;
+      overflow: visible;
+      overflow-wrap: normal;
+    }
+    .sourceCode {
+     background-color: transparent;
+     overflow: visible;
+    }
+    hr {
+      border: none;
+      border-top: 1px solid #1a1a1a;
+      height: 1px;
+      margin: 1em 0;
+    }
+    table {
+      margin: 1em 0;
+      border-collapse: collapse;
+      width: 100%;
+      overflow-x: auto;
+      display: block;
+      font-variant-numeric: lining-nums tabular-nums;
+    }
+    table caption {
+      margin-bottom: 0.75em;
+    }
+    tbody {
+      margin-top: 0.5em;
+      border-top: 1px solid #1a1a1a;
+      border-bottom: 1px solid #1a1a1a;
+    }
+    th {
+      border-top: 1px solid #1a1a1a;
+      padding: 0.25em 0.5em 0.25em 0.5em;
+    }
+    td {
+      padding: 0.125em 0.5em 0.25em 0.5em;
+    }
+    header {
+      margin-bottom: 4em;
+      text-align: center;
+    }
+    #TOC li {
+      list-style: none;
+    }
+    #TOC ul {
+      padding-left: 1.3em;
+    }
+    #TOC > ul {
+      padding-left: 0;
+    }
+    #TOC a:not(:hover) {
+      text-decoration: none;
+    }
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+  </style>
+  
+  <script>
+  window.MathJax = { tex:{ inlineMath:[["\\(","\\)"]], displayMath:[["\\[","\\]"]] },
+    options:{ skipHtmlTags:["script","noscript","style","textarea","pre","code"] } };
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" async></script>
+  <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+  <script>document.addEventListener("DOMContentLoaded",function(){
+    // Normalize every mermaid block to a clean <div class="mermaid"> with plain text.
+    // Pandoc emits <pre class="mermaid"><code>...</code></pre>; also handle code.language-mermaid.
+    var mnodes=document.querySelectorAll("pre.mermaid, pre.mermaid>code, pre>code.language-mermaid, code.language-mermaid, div.mermaid");
+    mnodes.forEach(function(node){
+      var pre=node.closest("pre")||node;
+      if(pre.getAttribute("data-mmd-done"))return;
+      var txt=(node.tagName==="CODE"?node:pre).textContent;
+      var d=document.createElement("div"); d.className="mermaid"; d.textContent=txt;
+      d.setAttribute("data-mmd-done","1");
+      pre.replaceWith(d);
+    });
+    // Copy buttons only on real code blocks (not mermaid).
+    document.querySelectorAll("pre").forEach(function(pre){
+      var w=document.createElement("div"); w.className="code-wrapper";
+      pre.parentNode.insertBefore(w,pre); w.appendChild(pre);
+      var b=document.createElement("button"); b.className="copy-btn"; b.textContent="Copiar";
+      b.onclick=function(){navigator.clipboard.writeText(pre.innerText);b.textContent="Copiado";b.classList.add("copied");
+        setTimeout(function(){b.textContent="Copiar";b.classList.remove("copied");},1500);};
+      w.appendChild(b);});
+    if(window.mermaid){mermaid.initialize({startOnLoad:false,theme:"default",securityLevel:"loose"});
+      mermaid.run({querySelector:".mermaid"});}
+  });</script>
+<style>
+body { font-family: -apple-system, "Segoe UI", Helvetica Neue, sans-serif; font-size: 11.5pt; line-height: 1.65; color:#1a1a1a; max-width: 980px; margin: 40px auto; padding: 0 22px; background:#fff; }
+h1 { color:#232f3e; font-size: 23pt; border-bottom: 3px solid #ff9900; padding-bottom: 8px; }
+h2 { color:#0073bb; border-bottom: 2px solid #0073bb; padding-bottom: 4px; font-size: 16pt; margin-top: 1.8em; }
+h3 { color:#232f3e; font-size: 13pt; }
+table { border-collapse: collapse; width: 100%; margin: 14px 0; font-size: 10.5pt; }
+th { background:#232f3e; color:#fff; padding: 8px; text-align:left; }
+td { border:1px solid #ddd; padding: 6px 9px; }
+tr:nth-child(even){ background:#f8f8f8; }
+code { background:#f0f0f0; padding: 2px 5px; border-radius:3px; font-size:10pt; color:#c7254e; }
+pre { background:#1e1e2e; padding:16px; border-radius:8px; font-size:9.7pt; overflow-x:auto; }
+pre code { background:none; color:#cdd6f4; padding:0; }
+blockquote { border-left:4px solid #0073bb; margin:14px 0; padding:8px 16px; background:#f0f7fc; }
+img { max-width:100%; height:auto; display:block; margin:14px auto; }
+.mermaid { background:#fff; padding:16px; border-radius:8px; border:1px solid #e0e0e0; margin:16px 0; text-align:center; }
+.math.display { overflow-x:auto; padding:6px 0; }
+.code-wrapper { position:relative; }
+.copy-btn { position:absolute; top:8px; right:8px; background:#3498db; color:#fff; border:none; border-radius:4px; padding:4px 10px; font-size:8pt; cursor:pointer; opacity:.7; }
+.copy-btn:hover{ opacity:1; } .copy-btn.copied{ background:#27ae60; }
+</style>
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title">Guia tecnica</h1>
+</header>
+<h1
+id="documentación-de-los-experimentos-explicación-clara">Documentación
+de los experimentos (explicación clara)</h1>
+<p>Cada experimento en lenguaje sencillo: qué pregunta responde, cómo se
+hizo, qué salió, y qué significa. Pensado para que cualquier lector del
+proyecto (incluido el jurado) lo entienda sin ser experto.</p>
+<hr />
+<h2 id="p0--arreglar-la-forma-de-medir">P0 — Arreglar la forma de
+medir</h2>
+<p><strong>La pregunta.</strong> ¿El número que reportaba el proyecto
+original (0.66) era confiable?</p>
+<p><strong>El problema.</strong> No. Dos fallas: (1) partía los datos al
+azar (<code>KFold</code>), y como la clase "positiva" tiene solo 15
+ejemplos, algunos pedazos quedaban casi sin positivos, haciendo que la
+medición saltara mucho de un pedazo a otro. (2) Reportaba el mejor
+pedazo evaluándolo sobre datos que el modelo ya había estudiado (hacer
+trampa en el examen).</p>
+<p><strong>La solución.</strong> Partir los datos manteniendo la
+proporción de clases (<code>StratifiedKFold</code>) y evaluar siempre
+sobre datos no vistos. Además, añadir métricas correctas para una escala
+con orden (QWK, MAE).</p>
+<p><strong>El resultado.</strong> La medición se volvió estable (la
+variación entre pedazos bajó de 0.090 a 0.072). El número honesto es
+<strong>QWK 0.415</strong> (no 0.66). Todo lo demás se compara contra
+este.</p>
+<hr />
+<h2 id="e1--un-llm-sin-entrenar-le-gana-a-nuestro-modelo-entrenado">E1 —
+¿Un LLM sin entrenar le gana a nuestro modelo entrenado?</h2>
+<p><strong>La pregunta.</strong> Tenemos un BERT afinado con 581
+ejemplos. ¿Un modelo de lenguaje grande (LLM) de Amazon Bedrock, sin
+ningún entrenamiento, clasifica igual de bien?</p>
+<p><strong>Cómo.</strong> Le pedimos a 4 LLMs (Nova Micro/Lite/Pro y
+Llama) que clasifiquen los mismos 581 comentarios, y comparamos su
+consenso contra el humano, igual que al BERT.</p>
+<p><strong>El resultado.</strong> El LLM (QWK <strong>0.498</strong>)
+iguala o supera al BERT afinado (0.415). La probabilidad de que el LLM
+sea mejor es 97%, aunque estadísticamente es un <strong>empate</strong>
+(el margen roza el cero).</p>
+<p><strong>Qué significa.</strong> El marco honesto: <em>con solo 581
+ejemplos, entrenar un modelo no logra superar a un LLM bien
+preguntado</em>. Es un hallazgo interesante y defendible para la
+tesis.</p>
+<hr />
+<h2 id="e2--cómo-combinar-la-opinión-de-varios-llms">E2 — ¿Cómo combinar
+la opinión de varios LLMs?</h2>
+<p><strong>La pregunta.</strong> Si 4 LLMs dan notas distintas (ej. 1,
+3, 3, 5), ¿cuál es "la" nota del equipo?</p>
+<p><strong>Cómo.</strong> Comparamos tres formas de combinar: voto por
+mayoría, promedio, y mediana (el valor de en medio).</p>
+<p><strong>El resultado.</strong> La <strong>mediana gana</strong> (QWK
+0.498 vs 0.488 de mayoría vs 0.452 de promedio).</p>
+<p><strong>Qué significa.</strong> Como la escala tiene orden, la
+mediana lo respeta y no se deja arrastrar por un LLM atípico. Lección
+práctica: usar mediana, no voto por mayoría.</p>
+<hr />
+<h2 id="e3--ampliar-los-datos-con-etiquetas-automáticas">E3 — Ampliar
+los datos con etiquetas automáticas</h2>
+<p><strong>La pregunta.</strong> Tenemos solo 581 comentarios
+etiquetados a mano. ¿Podemos usar los LLMs para etiquetar los otros
+~2000 sin meter basura?</p>
+<p><strong>Cómo.</strong> Solo aceptamos las etiquetas de los
+comentarios donde varios LLMs coinciden (señal de que es un caso claro).
+Verificamos primero: donde los 4 LLMs coinciden, aciertan al humano con
+QWK 0.79 (casi calidad humana).</p>
+<p><strong>El resultado.</strong> Añadiendo 1210 auto-etiquetas, el
+modelo sube a QWK 0.449 (+0.033). Mejora, pero aún dentro del margen de
+ruido.</p>
+<p><strong>Qué significa.</strong> Es la vía más prometedora para romper
+el techo de datos, aunque hay que cuidar el sesgo: las auto-etiquetas
+favorecen los casos fáciles.</p>
+<hr />
+<h2 id="e4--enseñarle-al-modelo-que-las-notas-tienen-orden">E4 —
+Enseñarle al modelo que las notas tienen orden</h2>
+<p><strong>La pregunta.</strong> El modelo trata las 5 clases como
+categorías sueltas. ¿Mejora si le enseñamos que 4 está cerca de 5 y
+lejos de 1?</p>
+<p><strong>Cómo.</strong> Cambiamos la "cabeza" del modelo por una
+ordinal (CORN), que predice la nota respetando el orden.</p>
+<p><strong>El resultado.</strong> El error promedio (MAE) bajó de 0.761
+a <strong>0.656</strong>, y esta mejora <strong>sí es estadísticamente
+significativa</strong> (el margen no cruza el cero).</p>
+<p><strong>Qué significa.</strong> El modelo ahora se equivoca "por
+poco" (predice 4 cuando era 5) en vez de "por mucho" (predice 1). Para
+una escala de aprobación, eso es exactamente lo deseable. Es de los tres
+resultados sólidos.</p>
+<hr />
+<h2 id="e5--que-el-modelo-diga-no-estoy-seguro">E5 — Que el modelo diga
+"no estoy seguro"</h2>
+<p><strong>La pregunta.</strong> El 40% de las clasificaciones del
+modelo tienen baja confianza. ¿Es más honesto dejar que se abstenga en
+esos casos?</p>
+<p><strong>Cómo.</strong> Calibramos la confianza (temperature scaling)
+y medimos qué pasa si solo etiquetamos los comentarios más
+confiables.</p>
+<p><strong>El resultado.</strong> Si el modelo etiqueta solo el 60%
+donde más confía, su calidad sube de QWK 0.391 a
+<strong>0.526</strong>.</p>
+<p><strong>Qué significa.</strong> Para medir opinión pública es más
+honesto reportar "35% negativo, 40% incierto" que forzar una etiqueta
+dudosa. Convierte una debilidad en una contribución de rigor.</p>
+<hr />
+<h2 id="e6--usar-un-modelo-que-ya-sabe-español-de-redes">E6 — Usar un
+modelo que ya sabe español de redes</h2>
+<p><strong>La pregunta.</strong> Nuestro modelo base fue entrenado para
+reseñas de productos. ¿Uno entrenado en tuits en español entiende mejor
+a TikTok?</p>
+<p><strong>Cómo.</strong> Comparamos tres modelos base: el actual, BETO
+(español), y RoBERTuito (500M de tuits en español).</p>
+<p><strong>El resultado.</strong> <strong>RoBERTuito gana</strong> (QWK
+0.470, +0.055). BETO, curiosamente, queda por debajo del baseline.</p>
+<p><strong>Qué significa.</strong> Estar en español no basta; importa el
+dominio (texto social). RoBERTuito, entrenado en tuits, entiende emojis,
+slang y el registro coloquial. Es de los tres resultados sólidos.</p>
+<hr />
+<h2 id="e7--no-borrar-los-emojis">E7 — No borrar los emojis</h2>
+<p><strong>La pregunta.</strong> La limpieza actual borra emojis, signos
+y mayúsculas. Pero un 😡 o un "!!!" dicen mucho del sentimiento.
+¿Conservarlos ayuda?</p>
+<p><strong>Cómo.</strong> Comparamos la limpieza agresiva actual contra
+una mínima que conserva emojis y puntuación, con el mismo modelo.</p>
+<p><strong>El resultado.</strong> La mínima mejora un poco (+0.017 QWK)
+pero está dentro del ruido: no es concluyente.</p>
+<p><strong>Qué significa.</strong> Un resultado honesto: la dirección es
+la esperada, pero con este tamaño de datos no se puede afirmar. Con
+RoBERTuito (que sí usa emojis) el efecto podría ser mayor (trabajo
+futuro).</p>
+<hr />
+<h2 id="e8--inventar-ejemplos-de-las-clases-raras">E8 — Inventar
+ejemplos de las clases raras</h2>
+<p><strong>La pregunta.</strong> Las clases positivas (4 y 5) tienen
+solo 45 ejemplos entre las dos. ¿Ayuda generar más con un LLM?</p>
+<p><strong>Cómo.</strong> Le pedimos a un LLM que reescribiera
+(parafraseara) los 45 positivos, generando 134 ejemplos sintéticos. Los
+añadimos solo al entrenamiento (nunca al examen).</p>
+<p><strong>El resultado.</strong> El F1 de las clases 4/5 subió de 0.22
+a <strong>0.31</strong>, y el QWK global +0.057.
+<strong>Estadísticamente significativo.</strong></p>
+<p><strong>Qué significa.</strong> Atacar directamente el desbalance
+funciona. Es de los tres resultados sólidos.</p>
+<hr />
+<h2 id="e9--es-justo-el-modelo">E9 — ¿Es justo el modelo?</h2>
+<p><strong>La pregunta.</strong> ¿El modelo funciona igual de bien en
+los tres ejes (infraestructura, seguridad, turismo) y en todas las
+clases?</p>
+<p><strong>Cómo.</strong> Análisis de sesgo (análogo local a SageMaker
+Clarify) sobre las predicciones.</p>
+<p><strong>El resultado.</strong> No: es peor en
+<strong>infraestructura</strong> (el eje más ambiguo) y tiende a
+<strong>evitar la clase neutral</strong> (sub-predice "neutral" en 7.7
+puntos).</p>
+<p><strong>Qué significa.</strong> El modelo tiene sesgos que hay que
+declarar. Es una sección de ética/limitaciones honesta para la tesis,
+obtenida sin costo.</p>
+<hr />
+<h2 id="en-una-frase">En una frase</h2>
+<p>De los 10 experimentos, <strong>tres dan mejoras reales y
+comprobables</strong> (E4 cabeza ordinal, E8 datos sintéticos, E6 modelo
+en español); el hallazgo más llamativo (E1: el LLM iguala al modelo
+entrenado) es un empate honesto; y el resto aporta rigor y honestidad
+metodológica. El techo lo pone el tamaño del gold set (581 ejemplos): la
+mejora de fondo será ampliarlo.</p>
+</body>
+</html>

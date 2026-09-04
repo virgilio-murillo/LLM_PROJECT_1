@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>Guia tecnica</title>
+  <style>
+    /* Default styles provided by pandoc.
+    ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+    */
+    html {
+      color: #1a1a1a;
+      background-color: #fdfdfd;
+    }
+    body {
+      margin: 0 auto;
+      max-width: 36em;
+      padding-left: 50px;
+      padding-right: 50px;
+      padding-top: 50px;
+      padding-bottom: 50px;
+      hyphens: auto;
+      overflow-wrap: break-word;
+      text-rendering: optimizeLegibility;
+      font-kerning: normal;
+    }
+    @media (max-width: 600px) {
+      body {
+        font-size: 0.9em;
+        padding: 12px;
+      }
+      h1 {
+        font-size: 1.8em;
+      }
+    }
+    @media print {
+      html {
+        background-color: white;
+      }
+      body {
+        background-color: transparent;
+        color: black;
+        font-size: 12pt;
+      }
+      p, h2, h3 {
+        orphans: 3;
+        widows: 3;
+      }
+      h2, h3, h4 {
+        page-break-after: avoid;
+      }
+    }
+    p {
+      margin: 1em 0;
+    }
+    a {
+      color: #1a1a1a;
+    }
+    a:visited {
+      color: #1a1a1a;
+    }
+    img {
+      max-width: 100%;
+    }
+    svg {
+      height: auto;
+      max-width: 100%;
+    }
+    h1, h2, h3, h4, h5, h6 {
+      margin-top: 1.4em;
+    }
+    h5, h6 {
+      font-size: 1em;
+      font-style: italic;
+    }
+    h6 {
+      font-weight: normal;
+    }
+    ol, ul {
+      padding-left: 1.7em;
+      margin-top: 1em;
+    }
+    li > ol, li > ul {
+      margin-top: 0;
+    }
+    blockquote {
+      margin: 1em 0 1em 1.7em;
+      padding-left: 1em;
+      border-left: 2px solid #e6e6e6;
+      color: #606060;
+    }
+    code {
+      white-space: pre-wrap;
+      font-family: Menlo, Monaco, Consolas, 'Lucida Console', monospace;
+      font-size: 85%;
+      margin: 0;
+      hyphens: manual;
+    }
+    pre {
+      margin: 1em 0;
+      overflow: auto;
+    }
+    pre code {
+      padding: 0;
+      overflow: visible;
+      overflow-wrap: normal;
+    }
+    .sourceCode {
+     background-color: transparent;
+     overflow: visible;
+    }
+    hr {
+      border: none;
+      border-top: 1px solid #1a1a1a;
+      height: 1px;
+      margin: 1em 0;
+    }
+    table {
+      margin: 1em 0;
+      border-collapse: collapse;
+      width: 100%;
+      overflow-x: auto;
+      display: block;
+      font-variant-numeric: lining-nums tabular-nums;
+    }
+    table caption {
+      margin-bottom: 0.75em;
+    }
+    tbody {
+      margin-top: 0.5em;
+      border-top: 1px solid #1a1a1a;
+      border-bottom: 1px solid #1a1a1a;
+    }
+    th {
+      border-top: 1px solid #1a1a1a;
+      padding: 0.25em 0.5em 0.25em 0.5em;
+    }
+    td {
+      padding: 0.125em 0.5em 0.25em 0.5em;
+    }
+    header {
+      margin-bottom: 4em;
+      text-align: center;
+    }
+    #TOC li {
+      list-style: none;
+    }
+    #TOC ul {
+      padding-left: 1.3em;
+    }
+    #TOC > ul {
+      padding-left: 0;
+    }
+    #TOC a:not(:hover) {
+      text-decoration: none;
+    }
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+  </style>
+  
+  <script>
+  window.MathJax = { tex:{ inlineMath:[["\\(","\\)"]], displayMath:[["\\[","\\]"]] },
+    options:{ skipHtmlTags:["script","noscript","style","textarea","pre","code"] } };
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" async></script>
+  <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+  <script>document.addEventListener("DOMContentLoaded",function(){
+    // Normalize every mermaid block to a clean <div class="mermaid"> with plain text.
+    // Pandoc emits <pre class="mermaid"><code>...</code></pre>; also handle code.language-mermaid.
+    var mnodes=document.querySelectorAll("pre.mermaid, pre.mermaid>code, pre>code.language-mermaid, code.language-mermaid, div.mermaid");
+    mnodes.forEach(function(node){
+      var pre=node.closest("pre")||node;
+      if(pre.getAttribute("data-mmd-done"))return;
+      var txt=(node.tagName==="CODE"?node:pre).textContent;
+      var d=document.createElement("div"); d.className="mermaid"; d.textContent=txt;
+      d.setAttribute("data-mmd-done","1");
+      pre.replaceWith(d);
+    });
+    // Copy buttons only on real code blocks (not mermaid).
+    document.querySelectorAll("pre").forEach(function(pre){
+      var w=document.createElement("div"); w.className="code-wrapper";
+      pre.parentNode.insertBefore(w,pre); w.appendChild(pre);
+      var b=document.createElement("button"); b.className="copy-btn"; b.textContent="Copiar";
+      b.onclick=function(){navigator.clipboard.writeText(pre.innerText);b.textContent="Copiado";b.classList.add("copied");
+        setTimeout(function(){b.textContent="Copiar";b.classList.remove("copied");},1500);};
+      w.appendChild(b);});
+    if(window.mermaid){mermaid.initialize({startOnLoad:false,theme:"default",securityLevel:"loose"});
+      mermaid.run({querySelector:".mermaid"});}
+  });</script>
+<style>
+body { font-family: -apple-system, "Segoe UI", Helvetica Neue, sans-serif; font-size: 11.5pt; line-height: 1.65; color:#1a1a1a; max-width: 980px; margin: 40px auto; padding: 0 22px; background:#fff; }
+h1 { color:#232f3e; font-size: 23pt; border-bottom: 3px solid #ff9900; padding-bottom: 8px; }
+h2 { color:#0073bb; border-bottom: 2px solid #0073bb; padding-bottom: 4px; font-size: 16pt; margin-top: 1.8em; }
+h3 { color:#232f3e; font-size: 13pt; }
+table { border-collapse: collapse; width: 100%; margin: 14px 0; font-size: 10.5pt; }
+th { background:#232f3e; color:#fff; padding: 8px; text-align:left; }
+td { border:1px solid #ddd; padding: 6px 9px; }
+tr:nth-child(even){ background:#f8f8f8; }
+code { background:#f0f0f0; padding: 2px 5px; border-radius:3px; font-size:10pt; color:#c7254e; }
+pre { background:#1e1e2e; padding:16px; border-radius:8px; font-size:9.7pt; overflow-x:auto; }
+pre code { background:none; color:#cdd6f4; padding:0; }
+blockquote { border-left:4px solid #0073bb; margin:14px 0; padding:8px 16px; background:#f0f7fc; }
+img { max-width:100%; height:auto; display:block; margin:14px auto; }
+.mermaid { background:#fff; padding:16px; border-radius:8px; border:1px solid #e0e0e0; margin:16px 0; text-align:center; }
+.math.display { overflow-x:auto; padding:6px 0; }
+.code-wrapper { position:relative; }
+.copy-btn { position:absolute; top:8px; right:8px; background:#3498db; color:#fff; border:none; border-radius:4px; padding:4px 10px; font-size:8pt; cursor:pointer; opacity:.7; }
+.copy-btn:hover{ opacity:1; } .copy-btn.copied{ background:#27ae60; }
+</style>
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title">Guia tecnica</h1>
+</header>
+<h1 id="guión-de-defensa--preguntas-del-jurado-y-respuestas">Guión de
+defensa — Preguntas del jurado y respuestas</h1>
+<p>Las 16 preguntas más duras y probables de un jurado de tesis en
+NLP/ML, con la respuesta basada en la evidencia REAL de los
+experimentos. Objetivo: que no te sorprendan. Todas las respuestas se
+apoyan en resultados que están en
+<code>experimentos/resultados/</code>.</p>
+<blockquote>
+<p><strong>Encuadre general que debes repetir:</strong> este es un
+<strong>estudio piloto metodológico</strong> con N=581, no una medición
+electoral definitiva. La contribución es un pipeline honesto de
+evaluación ordinal, no un número de aprobación cerrado.</p>
+</blockquote>
+<hr />
+<p><strong>Q1. "Tu hallazgo estrella (E1) es un empate, no una victoria.
+¿Por qué lo presentas?"</strong> Es precisamente el hallazgo. Con N=581,
+un consenso de 4 LLMs SIN entrenamiento iguala a un BERT afinado (QWK
+0.498 vs 0.415, IC de la diferencia [−0.002, +0.168] que incluye 0). El
+enunciado honesto no es "el LLM gana", sino <em>"el fine-tuning no logra
+superar a un LLM few-shot con esta cantidad de datos"</em>. Es útil: con
+datos escasos, invertir en prompting puede rendir tanto como
+entrenar.</p>
+<p><strong>Q2. "P=0.97 suena a que el LLM sí gana. ¿No te
+contradices?"</strong> No. P(diff&gt;0)=0.97 es la fracción de
+remuestreos donde el LLM quedó arriba; pero el IC 95% de la diferencia
+incluye el 0, así que no rechazo la igualdad al 5%. El enunciado
+preciso: <em>"la evidencia es débilmente favorable al LLM pero no
+concluyente"</em>. La comparación de puntos (0.415 vs 0.498) NO es la
+evidencia; la evidencia es el IC de la diferencia pareada.</p>
+<p><strong>Q3. "Usaste una sola partición de CV. ¿Cómo sé que no es
+suerte?"</strong> Corrí el baseline con validación cruzada en <strong>3
+semillas distintas</strong>: QWK 0.396 ± 0.020 (0.379, 0.392, 0.418). El
+baseline es <strong>estable entre particiones</strong> (desviación de
+solo 0.020). Los hallazgos no dependen de un sorteo afortunado.</p>
+<p><strong>Q4. "¿Por qué usar LLMs si admites que no son
+reproducibles?"</strong> Dos razones. Son el baseline realista
+(cualquiera clasifica hoy con un LLM sin etiquetar). Y mitigué la
+irreproducibilidad: temperature=0, modelId con versión fija, y guardé
+TODAS las respuestas crudas en <code>bedrock_raw.jsonl</code>, así que
+E1/E2/E3 se recomputan desde ese cache sin volver a llamar a Bedrock. La
+irreproducibilidad residual (updates del endpoint) la documento como
+limitación.</p>
+<p><strong>Q5. "La comparación LLM vs BERT es injusta: el LLM vio 6
+ejemplos en el prompt."</strong> Correcto, y por eso NO la enmarco como
+"igualdad de condiciones" sino como <em>"few-shot sin entrenamiento vs
+fine-tuning supervisado"</em>, dos paradigmas distintos. Verifiqué que
+los 6 ejemplos few-shot son manuales y NO están en el gold set 581 (0
+coincidencias), así que no hay fuga. El punto se fortalece: incluso
+dándole al LLM la ventaja del few-shot, solo empata.</p>
+<p><strong>Q6. "En E8 generas datos sintéticos de tus positivos. ¿No se
+filtran al test?"</strong> Lo detecté y lo arreglé. Reejecuté E8
+<strong>fold-aware</strong>: genero paráfrasis solo de los positivos del
+fold de entrenamiento, nunca del de validación (con
+<code>origen_idx</code> trazable). El efecto <strong>sobrevive</strong>:
+QWK +0.045 IC[+0.005, +0.087] (sigue excluyendo 0). La versión con el
+leakage daba +0.057; al corregirlo bajó a +0.045 pero sigue siendo
+significativo. Eso demuestra que el hallazgo es real, no un
+artefacto.</p>
+<p><strong>Q7. "N=581 con 15 casos de clase 5. ¿Puedes concluir algo
+sobre aprobación positiva?"</strong> No de forma definitiva, y lo digo
+explícitamente. Las conclusiones sobre clases 4 y 5 son tentativas por
+diseño; sus IC son muy amplios. El valor es metodológico y como estudio
+piloto, no como medición electoral.</p>
+<p><strong>Q8. "El auto-etiquetado (E3) suena a fuga circular."</strong>
+Por eso E3 es un resultado NEGATIVO que reporto con honestidad: +0.033
+QWK con IC[−0.025, +0.089] que incluye 0. El consenso NO ayudó. Lo
+esperado: los 4 LLMs solo coinciden en 17.6% de los casos, así que las
+auto-etiquetas favorecen los fáciles y estrechan la distribución.
+Documentar que no funciona es parte del método.</p>
+<p><strong>Q9. "¿Por qué BETO fue peor que un modelo multilingüe
+genérico?"</strong> BETO (español de España, Wikipedia/noticias) dio QWK
+0.320, peor que nlptown (0.415) y RoBERTuito (0.470). RoBERTuito está
+preentrenado en tuits en español (jerga, emojis, informalidad), que casa
+con TikTok. Lección: el ajuste de <strong>dominio</strong> (redes
+sociales) importa más que el idioma nominal.</p>
+<p><strong>Q10. "¿Qué es QWK y por qué en vez de accuracy?"</strong>
+Quadratic Weighted Kappa mide acuerdo con el humano corrigiendo por
+azar, y penaliza los errores en proporción al CUADRADO de la distancia
+ordinal. En una escala 1-5, confundir "muy negativo" con "neutral"
+(error de 2) debe pesar más que con "parcialmente negativo" (error de
+1). Accuracy trata todos los errores igual e ignora el orden. Uso QWK y
+MAE como métricas ordinales primarias.</p>
+<p><strong>Q11. "Corriste 9 experimentos. ¿No hay inflación de falsos
+positivos?"</strong> Apliqué <strong>Holm-Bonferroni</strong> con test
+de permutación. Con la corrección, ningún delta de <strong>QWK</strong>
+sobrevive (E1 p=0.061). Por eso soy precisa: mis hallazgos
+significativos son en OTRAS métricas: E4 en <strong>MAE</strong>
+(IC[+0.043, +0.164], lejos de 0) y E8 en <strong>F1 de clases
+4/5</strong>. No sobrevendo mejoras de QWK que no resisten la
+corrección.</p>
+<p><strong>Q12. "¿Por qué no combinaste todas las mejoras en un modelo
+final?"</strong> Decisión metodológica: cada experimento es un
+<strong>análisis ablativo</strong> (aísla el efecto de un factor).
+Combinarlas confundiría las contribuciones. Con N=581 y una sola
+muestra, un modelo combinado sobre-optimizado arriesga sobreajuste. La
+combinación (RoBERTuito+CORN+augmentation fold-aware) es el trabajo
+futuro natural, con más datos.</p>
+<p><strong>Q13. "¿El costo de la nube (Bedrock) se justifica?"</strong>
+El costo total fue ~$3-5 USD (581×4 modelos + paráfrasis). El BERT/LoRA
+corre local en GPU Metal gratis. Bedrock se usó solo donde aportaba:
+comparar LLMs de frontera sin infraestructura y generar paráfrasis. El
+empate de E1 justifica el gasto: mostró que un LLM de pago sin entrenar
+iguala al modelo local entrenado, un dato de decisión por $5.</p>
+<p><strong>Q14. "En E4 (CORN) la balanced accuracy cae aunque baja el
+MAE. ¿No es un retroceso?"</strong> Es el trade-off esperado de una
+cabeza ordinal. CORN optimiza la coherencia del orden (MAE de 0.761 a
+0.656, IC[+0.043, +0.164] significativo) prediciendo de forma más
+central/conservadora, lo que reduce aciertos en clases raras. El
+hallazgo de E4 es específicamente sobre MAE, no sobre balanced accuracy;
+lo reporto así, sin sobrevender.</p>
+<p><strong>Q15. "¿Cómo garantizas que el gold de 581 está bien
+etiquetado? ¿Acuerdo inter-anotador?"</strong> Punto débil real que
+reconozco: el gold se etiquetó manualmente (200 por eje). Si no hubo
+doble anotación con kappa inter-anotador, no conozco el techo humano de
+la tarea. Como referencia indirecta, donde 4 LLMs coinciden el QWK vs
+humano es 0.79, lo que sugiere ambigüedad intrínseca. Trabajo futuro:
+doble anotación de una submuestra para estimar el kappa
+humano-humano.</p>
+<p><strong>Q16. "El sesgo anti-neutral (E9): ¿invalida tu
+medición?"</strong> No la invalida pero la matiza, y lo reporto. El
+modelo sub-predice la clase neutral en 7.7 pp, empujando neutrales hacia
+los extremos. Al interpretar la aprobación aplico esta salvedad. Es
+exactamente el tipo de análisis (análogo a SageMaker Clarify) que un
+sistema responsable incluye, por eso lo hice explícito.</p>
+<hr />
+<h2 id="las-tres-frases-con-las-que-abres-y-cierras">Las tres frases con
+las que abres y cierras</h2>
+<ol type="1">
+<li><strong>Apertura:</strong> "Este es un estudio piloto metodológico:
+cómo medir aprobación política en escala ordinal con honestidad
+estadística, no una encuesta electoral."</li>
+<li><strong>Hallazgo central:</strong> "Con solo 581 ejemplos, un LLM
+sin entrenar iguala a nuestro modelo afinado; y las tres mejoras que sí
+resisten el escrutinio son la cabeza ordinal, el aumento de datos y el
+modelo en español social."</li>
+<li><strong>Cierre:</strong> "Reportamos con intervalos de confianza y
+corrección por comparaciones múltiples; lo que no supera el ruido lo
+declaramos nulo. Hicimos ciencia honesta."</li>
+</ol>
+</body>
+</html>

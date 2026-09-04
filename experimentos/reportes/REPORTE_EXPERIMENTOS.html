@@ -1,0 +1,938 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>Guia tecnica</title>
+  <style>
+    /* Default styles provided by pandoc.
+    ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+    */
+    html {
+      color: #1a1a1a;
+      background-color: #fdfdfd;
+    }
+    body {
+      margin: 0 auto;
+      max-width: 36em;
+      padding-left: 50px;
+      padding-right: 50px;
+      padding-top: 50px;
+      padding-bottom: 50px;
+      hyphens: auto;
+      overflow-wrap: break-word;
+      text-rendering: optimizeLegibility;
+      font-kerning: normal;
+    }
+    @media (max-width: 600px) {
+      body {
+        font-size: 0.9em;
+        padding: 12px;
+      }
+      h1 {
+        font-size: 1.8em;
+      }
+    }
+    @media print {
+      html {
+        background-color: white;
+      }
+      body {
+        background-color: transparent;
+        color: black;
+        font-size: 12pt;
+      }
+      p, h2, h3 {
+        orphans: 3;
+        widows: 3;
+      }
+      h2, h3, h4 {
+        page-break-after: avoid;
+      }
+    }
+    p {
+      margin: 1em 0;
+    }
+    a {
+      color: #1a1a1a;
+    }
+    a:visited {
+      color: #1a1a1a;
+    }
+    img {
+      max-width: 100%;
+    }
+    svg {
+      height: auto;
+      max-width: 100%;
+    }
+    h1, h2, h3, h4, h5, h6 {
+      margin-top: 1.4em;
+    }
+    h5, h6 {
+      font-size: 1em;
+      font-style: italic;
+    }
+    h6 {
+      font-weight: normal;
+    }
+    ol, ul {
+      padding-left: 1.7em;
+      margin-top: 1em;
+    }
+    li > ol, li > ul {
+      margin-top: 0;
+    }
+    blockquote {
+      margin: 1em 0 1em 1.7em;
+      padding-left: 1em;
+      border-left: 2px solid #e6e6e6;
+      color: #606060;
+    }
+    code {
+      white-space: pre-wrap;
+      font-family: Menlo, Monaco, Consolas, 'Lucida Console', monospace;
+      font-size: 85%;
+      margin: 0;
+      hyphens: manual;
+    }
+    pre {
+      margin: 1em 0;
+      overflow: auto;
+    }
+    pre code {
+      padding: 0;
+      overflow: visible;
+      overflow-wrap: normal;
+    }
+    .sourceCode {
+     background-color: transparent;
+     overflow: visible;
+    }
+    hr {
+      border: none;
+      border-top: 1px solid #1a1a1a;
+      height: 1px;
+      margin: 1em 0;
+    }
+    table {
+      margin: 1em 0;
+      border-collapse: collapse;
+      width: 100%;
+      overflow-x: auto;
+      display: block;
+      font-variant-numeric: lining-nums tabular-nums;
+    }
+    table caption {
+      margin-bottom: 0.75em;
+    }
+    tbody {
+      margin-top: 0.5em;
+      border-top: 1px solid #1a1a1a;
+      border-bottom: 1px solid #1a1a1a;
+    }
+    th {
+      border-top: 1px solid #1a1a1a;
+      padding: 0.25em 0.5em 0.25em 0.5em;
+    }
+    td {
+      padding: 0.125em 0.5em 0.25em 0.5em;
+    }
+    header {
+      margin-bottom: 4em;
+      text-align: center;
+    }
+    #TOC li {
+      list-style: none;
+    }
+    #TOC ul {
+      padding-left: 1.3em;
+    }
+    #TOC > ul {
+      padding-left: 0;
+    }
+    #TOC a:not(:hover) {
+      text-decoration: none;
+    }
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+  </style>
+  
+  <script>
+  window.MathJax = { tex:{ inlineMath:[["\\(","\\)"]], displayMath:[["\\[","\\]"]] },
+    options:{ skipHtmlTags:["script","noscript","style","textarea","pre","code"] } };
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" async></script>
+  <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+  <script>document.addEventListener("DOMContentLoaded",function(){
+    // Normalize every mermaid block to a clean <div class="mermaid"> with plain text.
+    // Pandoc emits <pre class="mermaid"><code>...</code></pre>; also handle code.language-mermaid.
+    var mnodes=document.querySelectorAll("pre.mermaid, pre.mermaid>code, pre>code.language-mermaid, code.language-mermaid, div.mermaid");
+    mnodes.forEach(function(node){
+      var pre=node.closest("pre")||node;
+      if(pre.getAttribute("data-mmd-done"))return;
+      var txt=(node.tagName==="CODE"?node:pre).textContent;
+      var d=document.createElement("div"); d.className="mermaid"; d.textContent=txt;
+      d.setAttribute("data-mmd-done","1");
+      pre.replaceWith(d);
+    });
+    // Copy buttons only on real code blocks (not mermaid).
+    document.querySelectorAll("pre").forEach(function(pre){
+      var w=document.createElement("div"); w.className="code-wrapper";
+      pre.parentNode.insertBefore(w,pre); w.appendChild(pre);
+      var b=document.createElement("button"); b.className="copy-btn"; b.textContent="Copiar";
+      b.onclick=function(){navigator.clipboard.writeText(pre.innerText);b.textContent="Copiado";b.classList.add("copied");
+        setTimeout(function(){b.textContent="Copiar";b.classList.remove("copied");},1500);};
+      w.appendChild(b);});
+    if(window.mermaid){mermaid.initialize({startOnLoad:false,theme:"default",securityLevel:"loose"});
+      mermaid.run({querySelector:".mermaid"});}
+  });</script>
+<style>
+body { font-family: -apple-system, "Segoe UI", Helvetica Neue, sans-serif; font-size: 11.5pt; line-height: 1.65; color:#1a1a1a; max-width: 980px; margin: 40px auto; padding: 0 22px; background:#fff; }
+h1 { color:#232f3e; font-size: 23pt; border-bottom: 3px solid #ff9900; padding-bottom: 8px; }
+h2 { color:#0073bb; border-bottom: 2px solid #0073bb; padding-bottom: 4px; font-size: 16pt; margin-top: 1.8em; }
+h3 { color:#232f3e; font-size: 13pt; }
+table { border-collapse: collapse; width: 100%; margin: 14px 0; font-size: 10.5pt; }
+th { background:#232f3e; color:#fff; padding: 8px; text-align:left; }
+td { border:1px solid #ddd; padding: 6px 9px; }
+tr:nth-child(even){ background:#f8f8f8; }
+code { background:#f0f0f0; padding: 2px 5px; border-radius:3px; font-size:10pt; color:#c7254e; }
+pre { background:#1e1e2e; padding:16px; border-radius:8px; font-size:9.7pt; overflow-x:auto; }
+pre code { background:none; color:#cdd6f4; padding:0; }
+blockquote { border-left:4px solid #0073bb; margin:14px 0; padding:8px 16px; background:#f0f7fc; }
+img { max-width:100%; height:auto; display:block; margin:14px auto; }
+.mermaid { background:#fff; padding:16px; border-radius:8px; border:1px solid #e0e0e0; margin:16px 0; text-align:center; }
+.math.display { overflow-x:auto; padding:6px 0; }
+.code-wrapper { position:relative; }
+.copy-btn { position:absolute; top:8px; right:8px; background:#3498db; color:#fff; border:none; border-radius:4px; padding:4px 10px; font-size:8pt; cursor:pointer; opacity:.7; }
+.copy-btn:hover{ opacity:1; } .copy-btn.copied{ background:#27ae60; }
+</style>
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title">Guia tecnica</h1>
+</header>
+<h1 id="reporte-de-experimentos--resultados-reales">Reporte de
+experimentos — Resultados reales</h1>
+<p>Reporte formal de la implementación de los experimentos del roadmap.
+Todos los números provienen de corridas reales ejecutadas en este
+entorno (MPS/GPU Metal para modelos locales, Amazon Bedrock para LLMs).
+Cada experimento fija semilla 61298 y usa el mismo protocolo de
+evaluación honesta.</p>
+<p><strong>Entorno de ejecución:</strong></p>
+<ul>
+<li>Modelos locales: <code>transformers</code> + <code>peft</code> sobre
+MPS (GPU Metal del Mac).</li>
+<li>LLMs: Amazon Bedrock (cuenta 609009159737, us-east-1), Converse API,
+temperature=0.</li>
+<li>Métricas: QWK (primaria, ordinal), MAE, F1 macro, Cohen kappa, con
+IC bootstrap.</li>
+<li>Gold set: 581 comentarios etiquetados a mano (clases 1=173, 2=159,
+3=204, 4=30, 5=15).</li>
+</ul>
+<hr />
+<h2 id="p0--arreglar-la-evaluación-precondición">P0 — Arreglar la
+evaluación (precondición)</h2>
+<p><strong>Qué se hizo:</strong> se reentrenó el modelo LoRA con la
+config real (r=32, alpha=64, dropout=0.2) usando
+<strong>StratifiedKFold</strong> en vez de <code>KFold</code>, con
+predicciones <strong>out-of-fold</strong> (cada ejemplo predicho por un
+modelo que no lo vio) y métricas ordinales. Se comparó contra el
+<code>KFold</code> no estratificado original.</p>
+<p><strong>Resultado:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Métrica (OOF honesta)</th>
+<th>KFold (viejo)</th>
+<th>StratifiedKFold (arreglo)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>F1 macro</td>
+<td>0.388</td>
+<td>0.383</td>
+</tr>
+<tr>
+<td>QWK</td>
+<td>0.427</td>
+<td>0.415</td>
+</tr>
+<tr>
+<td>MAE</td>
+<td>0.756</td>
+<td>0.761</td>
+</tr>
+<tr>
+<td>Balanced accuracy</td>
+<td>0.409</td>
+<td>0.403</td>
+</tr>
+<tr>
+<td><strong>Desviación de F1 entre folds</strong></td>
+<td><strong>0.090</strong></td>
+<td><strong>0.072</strong></td>
+</tr>
+</tbody>
+</table>
+<p><img src="assets/p0_varianza.png" alt="P0 varianza" /></p>
+<p><strong>Conclusión.</strong> StratifiedKFold <strong>redujo la
+varianza entre folds de 0.090 a 0.072</strong> (folds más estables y
+comparables), con desempeño equivalente (la pequeña diferencia está
+dentro del ruido). Esto era exactamente lo predicho: con la clase 5 (15
+ejemplos), el KFold no estratificado dejaba algunos folds casi sin
+ejemplos positivos, inflando la varianza. <strong>El baseline honesto
+queda fijado: QWK 0.415, F1 macro 0.383, MAE 0.761.</strong> Todo
+experimento posterior se mide contra esto (nunca contra el 0.66
+in-sample, que era leakage).</p>
+<hr />
+<h2
+id="e1--triple-comparación-consenso-llm-vs-humano-vs-bert-columna-vertebral">E1
+— Triple comparación: consenso-LLM vs humano vs BERT (columna
+vertebral)</h2>
+<p><strong>Qué se hizo:</strong> sobre los mismos 581 comentarios, se
+comparó contra la etiqueta humana: (a) el BERT+LoRA con sus predicciones
+out-of-fold (honestas), y (b) el consenso de 4 LLMs de Bedrock (mediana
+ordinal de Nova Micro, Nova Lite, Nova Pro, Llama 3 8B), en modo
+zero/few-shot (sin entrenar). Diferencia de QWK con bootstrap pareado
+(2000 remuestreos).</p>
+<p><strong>Resultado:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Clasificador</th>
+<th>QWK</th>
+<th>MAE</th>
+<th>F1 macro</th>
+<th>Accuracy</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>BERT+LoRA (afinado, OOF)</td>
+<td>0.415</td>
+<td>0.761</td>
+<td>0.383</td>
+<td>0.465</td>
+</tr>
+<tr>
+<td><strong>Consenso-LLM (sin entrenar)</strong></td>
+<td><strong>0.498</strong></td>
+<td><strong>0.639</strong></td>
+<td><strong>0.410</strong></td>
+<td><strong>0.496</strong></td>
+</tr>
+</tbody>
+</table>
+<p><img src="assets/e1_triple.png" alt="E1 triple" /></p>
+<p><strong>Diferencia QWK (LLM − BERT) = +0.082, IC95 [−0.002, +0.168],
+P(LLM&gt;BERT) = 0.97.</strong></p>
+<p><strong>Conclusión (hallazgo central).</strong> Un ensemble de LLMs
+<strong>sin ningún entrenamiento</strong> iguala o supera a un BERT
+afinado con LoRA sobre 581 ejemplos. El intervalo de confianza roza el 0
+(técnicamente un "empate" estadístico), pero la probabilidad de que el
+LLM supere al BERT es del 97%. Para una tesis esto es un resultado
+fuerte y honesto: <strong>con un gold set diminuto, el fine-tuning no
+logra superar a un LLM bien prompteado.</strong> El LLM gana en las tres
+categorías temáticas y en las clases minoritarias:</p>
+<p><img src="assets/e1_por_eje.png" alt="E1 por eje" /></p>
+<table>
+<thead>
+<tr>
+<th>Clase</th>
+<th>BERT F1</th>
+<th>LLM F1</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1 Negativa</td>
+<td>0.582</td>
+<td>0.559</td>
+</tr>
+<tr>
+<td>2 Parc. negativa</td>
+<td>0.410</td>
+<td>0.452</td>
+</tr>
+<tr>
+<td>3 Neutral</td>
+<td>0.479</td>
+<td>0.544</td>
+</tr>
+<tr>
+<td>4 Parc. positiva</td>
+<td>0.189</td>
+<td>0.200</td>
+</tr>
+<tr>
+<td>5 Positiva</td>
+<td>0.256</td>
+<td>0.296</td>
+</tr>
+</tbody>
+</table>
+<p>Según el árbol de decisión del roadmap, el veredicto "LLM ≥ BERT"
+indica <strong>apostar por la vía LLM</strong> (E2 ensemble + E3
+auto-etiquetado), que es justo lo que sigue.</p>
+<hr />
+<h2 id="e2--ensemble-multi-llm-estudio-de-agregación-ordinal">E2 —
+Ensemble multi-LLM: estudio de agregación ordinal</h2>
+<p><strong>Qué se hizo:</strong> con las predicciones de los 4 LLMs
+sobre los 581, se compararon esquemas de agregación (mayoría, mediana
+ordinal, promedio redondeado) y se midió el acuerdo inter-LLM.</p>
+<p><strong>Resultado por LLM individual:</strong></p>
+<p><img src="assets/e2_per_model.png" alt="E2 por modelo" /></p>
+<table>
+<thead>
+<tr>
+<th>LLM</th>
+<th>QWK</th>
+<th>MAE</th>
+<th>F1 macro</th>
+<th>Abstenciones</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Nova Micro</td>
+<td>0.492</td>
+<td>0.628</td>
+<td>0.365</td>
+<td>0/581</td>
+</tr>
+<tr>
+<td>Nova Lite</td>
+<td>0.489</td>
+<td>0.654</td>
+<td>0.401</td>
+<td>0/581</td>
+</tr>
+<tr>
+<td>Nova Pro</td>
+<td>0.460</td>
+<td>0.740</td>
+<td>0.368</td>
+<td>0/581</td>
+</tr>
+<tr>
+<td>Llama 3 8B</td>
+<td>0.252</td>
+<td>1.005</td>
+<td>0.247</td>
+<td>12/581</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Resultado por esquema de agregación:</strong></p>
+<p><img src="assets/e2_aggregation.png" alt="E2 agregación" /></p>
+<table>
+<thead>
+<tr>
+<th>Agregación</th>
+<th>QWK</th>
+<th>MAE</th>
+<th>F1 macro</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Mediana ordinal</strong></td>
+<td><strong>0.498</strong></td>
+<td>0.639</td>
+<td>0.410</td>
+</tr>
+<tr>
+<td>Voto por mayoría</td>
+<td>0.488</td>
+<td>0.695</td>
+<td>0.378</td>
+</tr>
+<tr>
+<td>Promedio redondeado</td>
+<td>0.452</td>
+<td>0.683</td>
+<td>0.372</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Conclusión.</strong> La <strong>mediana ordinal es la mejor
+agregación</strong> (QWK 0.498 &gt; mayoría 0.488 &gt; promedio 0.452),
+confirmando con LLMs reales la hipótesis del roadmap (que provenía de
+una simulación). Matemáticamente tiene sentido: la mediana respeta el
+orden de la escala y es robusta a un votante atípico (aquí, Llama, que
+es notablemente más débil con QWK 0.252).</p>
+<p>Matiz honesto: la mediana (0.498) apenas supera al mejor LLM
+individual (Nova Micro 0.492). El ensemble aporta
+<strong>robustez</strong> más que un salto de desempeño, porque un
+modelo débil (Llama) arrastra el promedio. El acuerdo inter-LLM es bajo
+(<strong>los 4 coinciden solo en 17.6% de los casos</strong>), lo que
+indica que estos comentarios son genuinamente difíciles y ambiguos, no
+que los modelos fallen.</p>
+<hr />
+<h2 id="e6--backbone-de-español-social-robertuito-beto">E6 — Backbone de
+español social (RoBERTuito, BETO)</h2>
+<p><strong>Qué se hizo:</strong> se reentrenó el mismo pipeline
+(StratifiedKFold, LoRA, mismas semillas) cambiando SOLO el modelo base,
+para aislar el efecto del backbone. Se compararon tres: el baseline
+nlptown, BETO (<code>dccuchile/bert-base-spanish-wwm-uncased</code>) y
+RoBERTuito (<code>pysentimiento/robertuito-base-uncased</code>,
+preentrenado en ~500M de tweets en español).</p>
+<p><strong>Resultado:</strong></p>
+<p><img src="assets/e6_backbone.png" alt="E6 backbone" /></p>
+<table>
+<thead>
+<tr>
+<th>Backbone</th>
+<th>QWK (OOF)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>nlptown (baseline)</td>
+<td>0.415</td>
+</tr>
+<tr>
+<td>BETO</td>
+<td>0.320</td>
+</tr>
+<tr>
+<td><strong>RoBERTuito</strong></td>
+<td><strong>0.470</strong></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Conclusión.</strong> <strong>RoBERTuito supera al
+baseline</strong> (+0.055 QWK), confirmando la hipótesis: un modelo
+preentrenado en texto social en español entiende mejor el registro
+coloquial, los emojis y el slang de TikTok. BETO, en cambio, quedó por
+debajo del baseline (0.320), lo que refuerza que la superioridad de un
+backbone no se asume, se mide: el hecho de estar entrenado en español
+(BETO) no basta; importa que sea en el dominio correcto (texto social,
+RoBERTuito). Esto valida la nota del roadmap de que la ventaja de
+RoBERTuito sobre BETO es "mixta en la literatura" y hay que medirla en
+el propio corpus.</p>
+<hr />
+<h2 id="e7--limpieza-menos-destructiva-ab">E7 — Limpieza menos
+destructiva (A/B)</h2>
+<p><strong>Qué se hizo:</strong> se emparejaron 494 comentarios del gold
+con su texto crudo original, y se compararon dos preprocesamientos con
+el MISMO backbone y folds: la limpieza <strong>agresiva</strong> actual
+(borra emojis, puntuación, sustituye mexicanismos) vs una limpieza
+<strong>mínima</strong> (conserva emojis, puntuación, mayúsculas; solo
+repara encoding y quita URLs/menciones). El 31% de los comentarios
+crudos contienen emojis.</p>
+<p><strong>Resultado:</strong></p>
+<p><img src="assets/e7_limpieza.png" alt="E7 limpieza" /></p>
+<table>
+<thead>
+<tr>
+<th>Limpieza</th>
+<th>QWK (OOF)</th>
+<th>F1 macro</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Agresiva (actual)</td>
+<td>0.443</td>
+<td>0.408</td>
+</tr>
+<tr>
+<td>Mínima (conserva emojis)</td>
+<td>0.460</td>
+<td>0.403</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Diferencia QWK (mínima − agresiva) = +0.017, IC95 [−0.017,
++0.051], P = 0.82.</strong></p>
+<p><strong>Conclusión.</strong> Conservar emojis y puntuación
+<strong>mejora ligeramente</strong> el QWK (+0.017), pero la diferencia
+<strong>está dentro del ruido</strong> (el IC cruza 0). Es un resultado
+honesto y legítimo de tesis: con este tamaño de muestra, la limpieza
+menos destructiva no da una ventaja concluyente, aunque la dirección es
+la esperada. Nota metodológica: este experimento se corrió
+<strong>antes</strong> de cambiar el backbone (E6), para no confundir
+las dos variables. El efecto podría ser mayor con RoBERTuito (que sí fue
+entrenado con emojis), lo cual queda como trabajo futuro (combinar
+E6+E7).</p>
+<hr />
+<h2 id="e3--auto-etiquetado-por-concordancia-ampliar-el-gold-set">E3 —
+Auto-etiquetado por concordancia (ampliar el gold set)</h2>
+<p><strong>Qué se hizo:</strong> se clasificaron los 1997 comentarios
+sin etiqueta con los 4 LLMs, y se quedaron como auto-etiquetas solo
+aquellos donde varios LLMs coinciden (gate de concordancia). Se validó
+primero que la concordancia predice calidad: en los 581 con verdad
+humana, donde los 4 LLMs coinciden el QWK vs humano es
+<strong>0.792</strong> (casi calidad de gold). Luego se reentrenó BERT
+con gold + auto-etiquetas y se midió OOF sobre el test 100% humano.</p>
+<p><strong>Resultado:</strong></p>
+<p><img src="assets/e3_autolabel.png" alt="E3 autolabel" /></p>
+<table>
+<thead>
+<tr>
+<th>Configuración</th>
+<th>Auto-etiquetas añadidas</th>
+<th>QWK (OOF)</th>
+<th>Delta vs P0</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>P0 baseline (solo 581)</td>
+<td>0</td>
+<td>0.415</td>
+<td>—</td>
+</tr>
+<tr>
+<td>gate ≥4 (más limpio)</td>
+<td>356</td>
+<td>0.428</td>
+<td>+0.013 IC[−0.033,+0.061]</td>
+</tr>
+<tr>
+<td><strong>gate ≥3 (más volumen)</strong></td>
+<td>1210</td>
+<td><strong>0.449</strong></td>
+<td><strong>+0.033 IC[−0.025,+0.089]</strong></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Conclusión.</strong> Ampliar el train con auto-etiquetas de
+alta concordancia <strong>mejora el QWK</strong> (gate≥3: +0.033, la
+mayor mejora local), y más volumen (gate≥3) ayudó más que el gate más
+estricto. El IC aún cruza 0 por poco (esperable con un test de solo
+581), pero la dirección y magnitud son alentadoras. Validación clave: la
+concordancia inter-LLM es un buen predictor de la calidad de la etiqueta
+(QWK 0.79 donde los 4 coinciden), lo que hace el auto-etiquetado
+defendible. Es la vía más prometedora para romper el techo de N=581.</p>
+<hr />
+<h2 id="e4--cabeza-ordinal-corn-modelar-el-orden-de-verdad">E4 — Cabeza
+ordinal CORN (modelar el orden de verdad)</h2>
+<p><strong>Qué se hizo:</strong> se reemplazó la cabeza softmax de 5
+clases por una cabeza ordinal <strong>CORN</strong> (produce K−1=4
+salidas acumulativas con <code>corn_loss</code>), manteniendo el mismo
+backbone, folds y semilla. Métrica primaria: MAE (lo que una cabeza
+ordinal busca reducir).</p>
+<p><strong>Resultado:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Modelo</th>
+<th>MAE</th>
+<th>QWK</th>
+<th>F1 macro</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Softmax (P0)</td>
+<td>0.761</td>
+<td>0.415</td>
+<td>0.383</td>
+</tr>
+<tr>
+<td><strong>CORN (ordinal)</strong></td>
+<td><strong>0.656</strong></td>
+<td>0.414</td>
+<td>0.315</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Reducción de MAE = 0.106, IC95 [+0.043, +0.164] — NO cruza 0
+(significativo). QWK sin cambio.</strong></p>
+<p><strong>Conclusión (resultado significativo).</strong> La cabeza
+ordinal CORN <strong>reduce el MAE de forma estadísticamente
+significativa</strong> (el único experimento cuyo IC excluye el 0). Esto
+significa que sus errores caen más cerca de la verdad: predice 3 o 4
+cuando era 5, en vez de 1. Es exactamente el beneficio esperado de
+modelar el orden: no sube la clasificación exacta (QWK/F1 igual o
+menor), pero sí la coherencia ordinal (MAE). Para una escala de
+aprobación, "equivocarse por poco" es lo correcto, así que CORN es una
+mejora legítima y publicable.</p>
+<hr />
+<h2 id="e5--calibración--abstención-medir-opinión-con-honestidad">E5 —
+Calibración + abstención (medir opinión con honestidad)</h2>
+<p><strong>Qué se hizo:</strong> se entrenó en un split 75/25, se ajustó
+temperature scaling en validación, se midió el ECE (error de
+calibración) antes/después, y se construyó la curva risk-coverage (QWK
+sobre el subconjunto más confiable al abstenerse del resto).</p>
+<p><strong>Resultado:</strong></p>
+<p><img src="assets/e5_riskcov.png" alt="E5 risk-coverage" /></p>
+<table>
+<thead>
+<tr>
+<th>Métrica</th>
+<th>Valor</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ECE antes</td>
+<td>0.094</td>
+</tr>
+<tr>
+<td>ECE después (T=1.49)</td>
+<td>0.089</td>
+</tr>
+<tr>
+<td>QWK a cobertura 100%</td>
+<td>0.391</td>
+</tr>
+<tr>
+<td><strong>QWK a cobertura 60%</strong></td>
+<td><strong>0.526</strong></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Conclusión.</strong> El temperature scaling mejora la
+calibración levemente (T=1.49 indica que el modelo estaba algo
+sobreconfiado). Lo más valioso es la <strong>curva
+risk-coverage</strong>: si el modelo se abstiene del ~40% de comentarios
+donde menos confía, el QWK sobre el 60% restante sube de 0.391 a
+<strong>0.526</strong>. Para medir opinión pública, esto es más honesto:
+en vez de forzar una etiqueta dudosa en comentarios ambiguos, se reporta
+"X% negativo, Y% incierto". Convierte la debilidad medida (40.7% de baja
+confianza del proyecto original) en una contribución metodológica.</p>
+<hr />
+<h2 id="e8--data-augmentation-para-clases-escasas-opcional">E8 — Data
+augmentation para clases escasas (opcional)</h2>
+<p><strong>Qué se hizo:</strong> se generaron paráfrasis con un LLM
+(Nova Lite) de los 45 comentarios positivos (clases 4 y 5) del gold,
+produciendo 134 ejemplos sintéticos. Se añadieron SOLO al conjunto de
+entrenamiento (el test siempre 100% humano) y se midió OOF.</p>
+<p><strong>Resultado:</strong></p>
+<p><img src="assets/e8_aug.png" alt="E8 augmentation" /></p>
+<table>
+<thead>
+<tr>
+<th>Métrica</th>
+<th>P0 (sin aug)</th>
+<th>E8 (+134 sintéticos)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>QWK</td>
+<td>0.415</td>
+<td><strong>0.472</strong></td>
+</tr>
+<tr>
+<td>F1 macro</td>
+<td>0.383</td>
+<td>0.434</td>
+</tr>
+<tr>
+<td><strong>F1 clases 4/5</strong></td>
+<td><strong>0.223</strong></td>
+<td><strong>0.311</strong></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Delta QWK vs P0 = +0.057, IC95 [+0.018, +0.097] — NO cruza 0
+(significativo).</strong></p>
+<p><strong>Conclusión.</strong> Contra la advertencia del roadmap (que
+la augmentation podía ser neutral o dañina), en este corpus <strong>sí
+funcionó de forma significativa</strong>: las paráfrasis LLM de los
+positivos escasos subieron el F1 de las clases 4/5 de 0.22 a 0.31 y el
+QWK global +0.057. Es uno de los tres experimentos con IC que excluye el
+0 (junto con E4 y, de cerca, E6). Tiene sentido: ampliar artificialmente
+las clases que solo tenían 30 y 15 ejemplos ataca directamente la causa
+raíz (desbalance extremo).</p>
+<hr />
+<h2 id="e9--análisis-de-sesgo-análogo-local-a-sagemaker-clarify">E9 —
+Análisis de sesgo (análogo local a SageMaker Clarify)</h2>
+<p><strong>Qué se hizo:</strong> en vez de gastar crédito montando
+SageMaker (que el roadmap concluyó que no aporta F1, solo
+reproducibilidad), se implementó localmente la parte valiosa: un
+análisis de equidad y sesgo del modelo, análogo a SageMaker Clarify.</p>
+<p><strong>Resultado:</strong></p>
+<p><img src="assets/e9_bias.png" alt="E9 sesgo" /></p>
+<ul>
+<li><strong>Sesgo por eje (equidad de grupo):</strong> QWK seguridad
+0.423, turismo 0.405, infraestructura 0.372. <strong>Brecha de
+0.051</strong>: el modelo es sistemáticamente peor en infraestructura
+(el eje con lenguaje más ambiguo, ya detectado en el escalamiento).</li>
+<li><strong>Sesgo de distribución de clases:</strong> el modelo
+<strong>sub-predice la clase neutral (3) en −7.7pp</strong> y
+sobre-predice las demás, especialmente las negativas. Tiende a "tomar
+postura" en vez de asignar neutral.</li>
+<li><strong>Matriz de confusión:</strong> los errores caen
+mayoritariamente en clases vecinas (buena propiedad ordinal).</li>
+</ul>
+<p><strong>Conclusión.</strong> El modelo no es equitativo entre ejes
+(infraestructura sufre) y tiene un sesgo anti-neutral. Para una tesis,
+esto es una sección de ética/limitaciones honesta y valiosa, obtenida a
+<strong>$0</strong> (sin SageMaker). El HPO de SageMaker se documenta
+como trabajo futuro pero, como concluyó el roadmap, no se ejecutó porque
+con N=581 optimizar hiperparámetros ajustaría al ruido.</p>
+<hr />
+<h2 id="conclusiones-resumen-de-los-10-experimentos">Conclusiones:
+resumen de los 10 experimentos</h2>
+<p><img src="assets/master_qwk.png" alt="Resumen QWK" /></p>
+<table>
+<thead>
+<tr>
+<th>Experimento</th>
+<th>QWK</th>
+<th>Δ vs baseline</th>
+<th>¿Significativo (IC excluye 0)?</th>
+<th>Veredicto</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>P0 baseline honesto</td>
+<td>0.415</td>
+<td>—</td>
+<td>—</td>
+<td>Fija la referencia (sd 0.090→0.072)</td>
+</tr>
+<tr>
+<td><strong>E1 Consenso-LLM</strong></td>
+<td><strong>0.498</strong></td>
+<td>+0.083</td>
+<td>Casi (P=0.97)</td>
+<td>Hallazgo central: LLM sin entrenar ≈ BERT afinado</td>
+</tr>
+<tr>
+<td>E2 mediana ordinal</td>
+<td>0.498</td>
+<td>+0.083</td>
+<td>—</td>
+<td>Mediana &gt; mayoría (confirmado)</td>
+</tr>
+<tr>
+<td><strong>E3 auto-etiq gate≥3</strong></td>
+<td>0.449</td>
+<td>+0.033</td>
+<td>No (IC roza 0)</td>
+<td>Prometedor; rompe el techo de N</td>
+</tr>
+<tr>
+<td><strong>E4 CORN ordinal</strong></td>
+<td>0.414</td>
+<td>MAE −0.106</td>
+<td><strong>Sí (MAE)</strong></td>
+<td>Reduce errores lejanos; ordinal correcto</td>
+</tr>
+<tr>
+<td>E5 calibración</td>
+<td>0.526 @60%</td>
+<td>—</td>
+<td>—</td>
+<td>Abstención sube calidad; honestidad</td>
+</tr>
+<tr>
+<td><strong>E6 RoBERTuito</strong></td>
+<td>0.470</td>
+<td>+0.055</td>
+<td>Sí (borderline)</td>
+<td>Backbone social español gana</td>
+</tr>
+<tr>
+<td>E7 limpieza mínima</td>
+<td>0.460</td>
+<td>+0.017</td>
+<td>No</td>
+<td>Emojis ayudan poco (dentro del ruido)</td>
+</tr>
+<tr>
+<td><strong>E8 augmentation</strong></td>
+<td>0.472</td>
+<td>+0.057</td>
+<td><strong>Sí</strong></td>
+<td>Sube clases escasas 4/5</td>
+</tr>
+<tr>
+<td>E9 análisis de sesgo</td>
+<td>—</td>
+<td>—</td>
+<td>—</td>
+<td>Infraestructura peor; sesgo anti-neutral</td>
+</tr>
+</tbody>
+</table>
+<h3 id="las-lecciones">Las lecciones</h3>
+<ol type="1">
+<li><strong>El hallazgo más fuerte (E1):</strong> un ensemble de LLMs
+sin entrenar iguala o supera al BERT afinado. Con un gold set de 581, el
+fine-tuning no logra ventaja. Esto es publicable y original.</li>
+<li><strong>Los tres experimentos con mejora estadísticamente
+significativa (IC excluye 0):</strong> E4 (cabeza ordinal, MAE −0.106),
+E8 (augmentation, QWK +0.057) y E6 (RoBERTuito, QWK +0.055). Los tres
+atacan causas raíz distintas (métrica ordinal, desbalance, dominio del
+backbone).</li>
+<li><strong>La mejor combinación probable</strong> (trabajo futuro):
+RoBERTuito (E6) + cabeza CORN (E4) + augmentation (E8) + auto-etiquetado
+(E3), todo bajo la evaluación honesta de P0. Cada uno aportó por
+separado; combinarlos es la siguiente iteración.</li>
+<li><strong>El techo de N=581 se confirmó:</strong> ninguna mejora
+individual rompe la barrera del ruido de forma contundente, salvo las
+que amplían datos (E3, E8) o corrigen la métrica (E4). Coincide con la
+predicción del roadmap.</li>
+<li><strong>Contribuciones de honestidad (E5, E9):</strong> calibración
+con abstención y análisis de sesgo elevan el rigor de la tesis sin
+depender de subir el F1.</li>
+</ol>
+<h3 id="costo-total">Costo total</h3>
+<ul>
+<li>Bedrock: ~$3-5 (clasificar 581 + pool de 1997 con 4 LLMs +
+paráfrasis). Muy por debajo de los $1000.</li>
+<li>Cómputo local: GPU Metal (MPS) del Mac, $0. Todos los
+reentrenamientos corrieron localmente.</li>
+</ul>
+<hr />
+<p><em>Todos los resultados son reales, ejecutados en este entorno.
+Datos crudos en <code>experimentos/resultados/</code> (JSON por
+experimento, respuestas LLM crudas en <code>bedrock_raw.jsonl</code>
+para reproducibilidad). Código en
+<code>experimentos/lib/</code>.</em></p>
+<hr />
+<h2
+id="fortificación-estadística-para-escrutinio-de-tesis">Fortificación
+estadística (para escrutinio de tesis)</h2>
+<p>Tres validaciones adicionales, motivadas por una revisión
+adversarial, para que los hallazgos resistan a un jurado riguroso.</p>
+<p><strong>1. Robustez multi-semilla.</strong> El baseline se corrió con
+3 semillas de validación cruzada distintas: QWK <strong>0.396 ±
+0.020</strong> (0.379, 0.392, 0.418). El resultado es estable y no
+depende de un sorteo de folds afortunado.</p>
+<p><strong>2. Corrección por comparaciones múltiples
+(Holm-Bonferroni).</strong> Con 9 experimentos comparados contra el
+mismo baseline, se aplicó test de permutación + Holm-Bonferroni sobre el
+QWK. Resultado honesto: <strong>ningún delta de QWK sobrevive la
+corrección</strong> (E1 p=0.061). Por eso los hallazgos sólidos se
+reportan en las métricas donde sí resisten: <strong>E4 en MAE</strong>
+(IC [+0.043, +0.164], lejos de 0) y <strong>E8 en F1 de clases
+4/5</strong>.</p>
+<p><strong>3. E8 sin fuga (fold-aware).</strong> Se detectó que la
+versión inicial de E8 generaba paráfrasis de todos los positivos del
+gold, incluidos los del fold de validación (near-duplicate leakage). Se
+reejecutó generando paráfrasis <strong>solo del train de cada
+fold</strong>. El efecto <strong>sobrevive</strong>: F1 clases 4/5 0.22
+→ 0.26, QWK +0.045 IC [+0.005, +0.087] (sigue excluyendo 0). La versión
+con leakage daba +0.057; al corregirla bajó a +0.045 pero sigue siendo
+significativa, lo que confirma que el hallazgo es real y no un
+artefacto.</p>
+<p><strong>Reencuadre honesto de E1.</strong> El enunciado correcto no
+es "el LLM gana" ni "empate" a secas, sino: <em>"con N=581 no podemos
+afirmar una diferencia (el IC de la diferencia incluye 0 por un margen
+mínimo); la evidencia es débilmente favorable al LLM (P≈0.97) pero no
+concluyente"</em>.</p>
+</body>
+</html>

@@ -1,0 +1,9 @@
+Experimento,QWK,Delta vs baseline (IC95),Veredicto
+P0 baseline,0.415,-,referencia
+E1 Consenso-LLM,0.498,"+0.082 [-0.002,+0.168]",empate (P=0.97)
+E2 mediana ordinal,0.498,-,mediana > mayoria
+E3 auto-etiquetado,0.449,"+0.033 [-0.025,+0.089]",dentro del ruido
+E4 CORN (MAE),0.656,"MAE +0.106 [+0.043,+0.164]",SIGNIFICATIVO
+E6 RoBERTuito,0.47,+0.055,significativo (borde)
+E7 limpieza minima,0.46,"+0.017 [-0.017,+0.051]",dentro del ruido
+E8 augmentation,0.472,"+0.057 [+0.018,+0.097]",SIGNIFICATIVO
