@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="generator" content="pandoc" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
-  <title>Guia tecnica</title>
+  <title>Reporte de experimentos</title>
   <style>
     /* Default styles provided by pandoc.
     ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -169,60 +169,10 @@
       vertical-align: middle;
     }
   </style>
-  
-  <script>
-  window.MathJax = { tex:{ inlineMath:[["\\(","\\)"]], displayMath:[["\\[","\\]"]] },
-    options:{ skipHtmlTags:["script","noscript","style","textarea","pre","code"] } };
-  </script>
-  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" async></script>
-  <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
-  <script>document.addEventListener("DOMContentLoaded",function(){
-    // Normalize every mermaid block to a clean <div class="mermaid"> with plain text.
-    // Pandoc emits <pre class="mermaid"><code>...</code></pre>; also handle code.language-mermaid.
-    var mnodes=document.querySelectorAll("pre.mermaid, pre.mermaid>code, pre>code.language-mermaid, code.language-mermaid, div.mermaid");
-    mnodes.forEach(function(node){
-      var pre=node.closest("pre")||node;
-      if(pre.getAttribute("data-mmd-done"))return;
-      var txt=(node.tagName==="CODE"?node:pre).textContent;
-      var d=document.createElement("div"); d.className="mermaid"; d.textContent=txt;
-      d.setAttribute("data-mmd-done","1");
-      pre.replaceWith(d);
-    });
-    // Copy buttons only on real code blocks (not mermaid).
-    document.querySelectorAll("pre").forEach(function(pre){
-      var w=document.createElement("div"); w.className="code-wrapper";
-      pre.parentNode.insertBefore(w,pre); w.appendChild(pre);
-      var b=document.createElement("button"); b.className="copy-btn"; b.textContent="Copiar";
-      b.onclick=function(){navigator.clipboard.writeText(pre.innerText);b.textContent="Copiado";b.classList.add("copied");
-        setTimeout(function(){b.textContent="Copiar";b.classList.remove("copied");},1500);};
-      w.appendChild(b);});
-    if(window.mermaid){mermaid.initialize({startOnLoad:false,theme:"default",securityLevel:"loose"});
-      mermaid.run({querySelector:".mermaid"});}
-  });</script>
-<style>
-body { font-family: -apple-system, "Segoe UI", Helvetica Neue, sans-serif; font-size: 11.5pt; line-height: 1.65; color:#1a1a1a; max-width: 980px; margin: 40px auto; padding: 0 22px; background:#fff; }
-h1 { color:#232f3e; font-size: 23pt; border-bottom: 3px solid #ff9900; padding-bottom: 8px; }
-h2 { color:#0073bb; border-bottom: 2px solid #0073bb; padding-bottom: 4px; font-size: 16pt; margin-top: 1.8em; }
-h3 { color:#232f3e; font-size: 13pt; }
-table { border-collapse: collapse; width: 100%; margin: 14px 0; font-size: 10.5pt; }
-th { background:#232f3e; color:#fff; padding: 8px; text-align:left; }
-td { border:1px solid #ddd; padding: 6px 9px; }
-tr:nth-child(even){ background:#f8f8f8; }
-code { background:#f0f0f0; padding: 2px 5px; border-radius:3px; font-size:10pt; color:#c7254e; }
-pre { background:#1e1e2e; padding:16px; border-radius:8px; font-size:9.7pt; overflow-x:auto; }
-pre code { background:none; color:#cdd6f4; padding:0; }
-blockquote { border-left:4px solid #0073bb; margin:14px 0; padding:8px 16px; background:#f0f7fc; }
-img { max-width:100%; height:auto; display:block; margin:14px auto; }
-.mermaid { background:#fff; padding:16px; border-radius:8px; border:1px solid #e0e0e0; margin:16px 0; text-align:center; }
-.math.display { overflow-x:auto; padding:6px 0; }
-.code-wrapper { position:relative; }
-.copy-btn { position:absolute; top:8px; right:8px; background:#3498db; color:#fff; border:none; border-radius:4px; padding:4px 10px; font-size:8pt; cursor:pointer; opacity:.7; }
-.copy-btn:hover{ opacity:1; } .copy-btn.copied{ background:#27ae60; }
-</style>
 </head>
 <body>
 <header id="title-block-header">
-<h1 class="title">Guia tecnica</h1>
+<h1 class="title">Reporte de experimentos</h1>
 </header>
 <h1 id="reporte-de-experimentos--resultados-reales">Reporte de
 experimentos — Resultados reales</h1>
@@ -243,8 +193,8 @@ IC bootstrap.</li>
 3=204, 4=30, 5=15).</li>
 </ul>
 <hr />
-<h2 id="p0--arreglar-la-evaluación-precondición">P0 — Arreglar la
-evaluación (precondición)</h2>
+<h2 id="p0--evaluación-out-of-fold-estratificada-referencia-interna">P0
+— Evaluación out-of-fold estratificada (referencia interna)</h2>
 <p><strong>Qué se hizo:</strong> se reentrenó el modelo LoRA con la
 config real (r=32, alpha=64, dropout=0.2) usando
 <strong>StratifiedKFold</strong> en vez de <code>KFold</code>, con
@@ -296,8 +246,10 @@ dentro del ruido). Esto era exactamente lo predicho: con la clase 5 (15
 ejemplos), el KFold no estratificado dejaba algunos folds casi sin
 ejemplos positivos, inflando la varianza. <strong>El baseline honesto
 queda fijado: QWK 0.415, F1 macro 0.383, MAE 0.761.</strong> Todo
-experimento posterior se mide contra esto (nunca contra el 0.66
-in-sample, que era leakage).</p>
+experimento posterior se compara contra esta referencia out-of-fold. El
+0.66/0.67 del proyecto base es una medición in-sample (responde una
+pregunta distinta: el ajuste del mejor fold), por lo que no es la
+referencia adecuada para comparar generalización entre experimentos.</p>
 <hr />
 <h2
 id="e1--triple-comparación-consenso-llm-vs-humano-vs-bert-columna-vertebral">E1
@@ -341,14 +293,15 @@ zero/few-shot (sin entrenar). Diferencia de QWK con bootstrap pareado
 <p><strong>Diferencia QWK (LLM − BERT) = +0.082, IC95 [−0.002, +0.168],
 P(LLM&gt;BERT) = 0.97.</strong></p>
 <p><strong>Conclusión (hallazgo central).</strong> Un ensemble de LLMs
-<strong>sin ningún entrenamiento</strong> iguala o supera a un BERT
-afinado con LoRA sobre 581 ejemplos. El intervalo de confianza roza el 0
-(técnicamente un "empate" estadístico), pero la probabilidad de que el
-LLM supere al BERT es del 97%. Para una tesis esto es un resultado
-fuerte y honesto: <strong>con un gold set diminuto, el fine-tuning no
-logra superar a un LLM bien prompteado.</strong> El consenso-LLM obtiene
-mayor QWK en las tres categorías (diferencias por eje no concluyentes) y
-en las clases minoritarias:</p>
+<strong>sin ningún entrenamiento</strong> iguala al BERT afinado con
+LoRA sobre 581 ejemplos. La diferencia es <strong>no
+concluyente</strong>: el intervalo de confianza de la diferencia incluye
+el 0 (por un margen mínimo), aunque la probabilidad de que el LLM supere
+al BERT sea del 97%. Para una tesis esto es un resultado fuerte y
+honesto: <strong>con un gold set diminuto, el fine-tuning no logra
+superar a un LLM bien prompteado.</strong> El consenso-LLM obtiene mayor
+QWK en las tres categorías (diferencias por eje no concluyentes) y en
+las clases minoritarias:</p>
 <p><img src="assets/e1_por_eje.png" alt="E1 por eje" /></p>
 <table>
 <thead>

@@ -1,6 +1,6 @@
 Experimento,QWK,Delta vs baseline (IC95),Veredicto
 P0 baseline,0.415,-,referencia
-E1 Consenso-LLM,0.498,"+0.082 [-0.002,+0.168]",empate (P=0.97)
+E1 Consenso-LLM,0.498,"+0.082 [-0.002,+0.168]",no concluyente (IC incluye 0; P=0.97)
 E2 mediana ordinal,0.498,-,mediana > mayoria
 E3 auto-etiquetado,0.449,"+0.033 [-0.025,+0.089]",dentro del ruido
 E4 CORN ordinal,0.414,"MAE -0.106 [+0.043,+0.164] (mejora en MAE, no QWK)",SIGNIFICATIVO (MAE)

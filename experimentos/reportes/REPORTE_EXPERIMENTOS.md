@@ -45,7 +45,7 @@ Reporte formal de la implementación de los experimentos del roadmap. Todos los 
 
 **Diferencia QWK (LLM − BERT) = +0.082, IC95 [−0.002, +0.168], P(LLM>BERT) = 0.97.**
 
-**Conclusión (hallazgo central).** Un ensemble de LLMs **sin ningún entrenamiento** iguala o supera a un BERT afinado con LoRA sobre 581 ejemplos. El intervalo de confianza roza el 0 (técnicamente un "empate" estadístico), pero la probabilidad de que el LLM supere al BERT es del 97%. Para una tesis esto es un resultado fuerte y honesto: **con un gold set diminuto, el fine-tuning no logra superar a un LLM bien prompteado.** El consenso-LLM obtiene mayor QWK en las tres categorías (diferencias por eje no concluyentes) y en las clases minoritarias:
+**Conclusión (hallazgo central).** Un ensemble de LLMs **sin ningún entrenamiento** iguala al BERT afinado con LoRA sobre 581 ejemplos. La diferencia es **no concluyente**: el intervalo de confianza de la diferencia incluye el 0 (por un margen mínimo), aunque la probabilidad de que el LLM supere al BERT sea del 97%. Para una tesis esto es un resultado fuerte y honesto: **con un gold set diminuto, el fine-tuning no logra superar a un LLM bien prompteado.** El consenso-LLM obtiene mayor QWK en las tres categorías (diferencias por eje no concluyentes) y en las clases minoritarias:
 
 ![E1 por eje](assets/e1_por_eje.png)
 
